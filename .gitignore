@@ -1,4 +1,5 @@
 #All: poster, article, pres
+*.acr
 *.aux
 *.bbl
 *.blg
