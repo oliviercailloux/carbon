@@ -4,8 +4,8 @@
 \NewDocumentCommand{\commentOC}{m}{\textcolor{blue}{{\small$\big[$OC: #1$\big]$}}}
 %Requires package babel and option [french]. According to babel doc, need two braces around \selectlanguage to make the changes really local.
 \NewDocumentCommand{\commentOCf}{m}{\textcolor{blue}{{\small\selectlanguage{french}$\big[$OC : #1$\big]$}}}
-\NewDocumentCommand{\commentYM}{m}{\textcolor{red}{{\small$\big[$YM: #1$\big]$}}}
-\NewDocumentCommand{\commentYMf}{m}{\textcolor{red}{{\small\selectlanguage{french}$\big[$YM : #1$\big]$}}}
+\NewDocumentCommand{\commentHG}{m}{\textcolor{red}{{\small$\big[$HG: #1$\big]$}}}
+\NewDocumentCommand{\commentHGf}{m}{\textcolor{red}{{\small\selectlanguage{french}$\big[$HG : #1$\big]$}}}
 
 \bibliographystyle{abbrvnat}
 \NewDocumentCommand{\possessivecite}{O{}m}{\citeauthor{#2}’s \citeyearpar[#1]{#2}}
