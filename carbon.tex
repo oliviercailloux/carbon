@@ -168,6 +168,26 @@ Utilisation de l’argent de la taxe :
 
 Prix typique d’un Paris New York semble être de 400 € A/R.
 
+\subsection{Version exponentielle}
+Given $α, β \in \intvl{1, n}$, define $l_α^{t_β} = \sum_{i = 0}^α c_i \lambda^{t_β - t_i}$, 
+and let’s write $l_n = l_n^{t_n}$ for short.
+Define $l_0 = 0$.
+
+%Define $C_i = \sum_{j = i}^n c_j$. Define $T_i = \sum_{j = 1}^i t_i$ (so that $T_1 = t_1$).
+%It follows that $l_n^{t_n} = \sum C_i λ^{t_n - T_i}$. As $l_{n - 1}^{t_{n - 1}} = \sum C_i λ^{t_{n - 1} - T_i}$, and $λ^{t_n - T_i} λ^{t_{n - 1} - t_n} = λ^{t_{n - 1} - T_i}$, 
+We have $l_n^{t_n} = \sum_{i = 0}^n c_i \lambda^{t_n - t_i} = \sum_{i = 0}^{n - 1} c_i \lambda^{t_n - t_i} + c_n = \frac{\sum_{i = 0}^{n - 1} c_i λ^{t_{n - 1} - t_i}}{λ^{t_{n - 1} - t_n}} + c_n = l_{n - 1}^{t_{n - 1}}λ^{t_n - t_{n - 1}} + c_n$.
+
+The tax of $v_1$ is defined as $\tau(v_1) = \int_0^{c_1} k (1 + \epsilon)^x dx = k \frac{(1 + \epsilon)^{c_1} - 1}{\log(1 + \epsilon)}$.
+Letting $α = 1 + ε$, we have $\tau(v_1) = k \frac{α^{c_1} - 1}{\log(α)}$.
+
+The tax of $v_n$ is defined as $\tau(v_n) = \int_{l_{n - 1}}^{l_n} k (1 + \epsilon)^x dx = k (1 + \epsilon)^{l_{n - 1}^{t_n}} \frac{(1 + \epsilon)^{c_n} - 1}{\log(1 + \epsilon)} = k \frac{(1 + \epsilon)^{l_n^{t_n}} - (1 + \epsilon)^{l_{n - 1}^{t_n}} }{\log(1 + \epsilon)}$.
+
+Letting $r = \frac{k}{\log(1 + ε)}$ and $α = 1 + ε$, we get $\tau(v_n) = r (α^{l_{n - 1}^{t_n} + c_n} - α^{l_{n - 1}^{t_n}}) = r (α^{l_n^{t_n}} - α^{l_{n - 1}^{t_n}})$.
+
+%Also, $l_j^{t_j} = l_{j - 1}^{t_{j - 1}} x + c_j$… And, $l_j^{t_j} = l_{j - 1}^{t_j} + c_j$. Thus, $l_{j - 1}^{t_j} = l_{j - 1}^{t_{j - 1}} x$. And $λ^{t_{j - 1} - t_i} λ^{t_j - t_{j - 1}} = λ^{t_j - t_i}$.
+
+Half-life 2 years thus $λ^2 = 1/2$ thus $λ = \frac{\sqrt{2}}{2}$.
+
 \subsection{Loose}
 \begin{itemize}
 \item What and who should be taxed. Activities that are high emissions should be the ones aimed at. The level of the taxe should be dependent on how much these activities are essential to our jobs. It should be highly dependent on the stage of the career of the person being taxed.
@@ -240,7 +260,6 @@ trade policies, Congress introduced three carbon tax bills in 2009. 1
 the recently proposed French carbon tax was
 designed to cover the sectors not addressed by the EU Emissions Trading Scheme (EU ETS).
 
-
 \section{Petitions} 
 \begin{itemize}
 \item \emph{Max-Planck-Gesellschaft}: In 2018, an intern petition was launched so that the employees could pledge not to take the plane again for short distances. This petition was signed by 500 persons and was made public. 
@@ -249,4 +268,3 @@ designed to cover the sectors not addressed by the EU Emissions Trading Scheme (
 \end{itemize}
 
 \end{document}
-
