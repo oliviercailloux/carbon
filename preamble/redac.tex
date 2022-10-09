@@ -1,5 +1,7 @@
 %Requires package xcolor.
 %\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{chocolate}{rgb}{0.82,0.41,0.12}
+\newcommand{\chocolate}[1]{\textcolor{chocolate}{#1}}
 %I observed that two braces around \small are required to make it local.
 \NewDocumentCommand{\commentOC}{m}{\textcolor{blue}{{\small$\big[$OC: #1$\big]$}}}
 %Requires package babel and option [french]. According to babel doc, need two braces around \selectlanguage to make the changes really local.
@@ -11,15 +13,17 @@
 \NewDocumentCommand{\possessivecite}{O{}m}{\citeauthor{#2}’s \citeyearpar[#1]{#2}}
 \NewDocumentCommand{\Possessivecite}{O{}m}{\Citeauthor{#2}’s \citeyearpar[#1]{#2}}
 
-\declaretheorem{theorem}
-\declaretheorem{lemma}
-\declaretheorem{proposition}
-\declaretheorem{conjecture}
-\declaretheorem{corollary}
+\iftoggle{LCart}{
+	\declaretheorem{theorem}
+	\declaretheorem{lemma}
+	\declaretheorem{proposition}
+	\declaretheorem{conjecture}
+	\declaretheorem{corollary}
 %Possibly: qed=\scalebox{1.2}{$\hexagon$} (and \usepackage{wasysym}, after amssymb). But probably not useful as most definitions are one § only. Might also consider: circledast, circledcirc, circleddash; black triangle or black circle; diamond…
-\declaretheorem[style=definition]{definition}
-\declaretheorem[style=remark, qed=$\triangle$]{example}
-\declaretheorem[style=remark, qed=$\triangle$]{remark}
+	\declaretheorem[style=definition]{definition}
+	\declaretheorem[style=remark, qed=$\triangle$]{example}
+	\declaretheorem[style=remark, qed=$\triangle$]{remark}
+}
 
 %https://tex.stackexchange.com/a/467188, https://tex.stackexchange.com/a/36088 - uncomment if one of those symbols is used.
 %\DeclareFontFamily{U} {MnSymbolD}{}
@@ -206,6 +210,8 @@
 %→ is defined by default as \textrightarrow, which is invalid in math mode. Same thing for the three other commands. Using \DeclareUnicodeCharacter instead of \newunicodechar because the latter warns about the previous definition.
 %→ Rightwards Arrow
 \DeclareUnicodeCharacter{2192}{\ifmmode\rightarrow\else\textrightarrow\fi}
+%→ Rightwards Double Arrow
+\DeclareUnicodeCharacter{21D2}{\Rightarrow}
 %¬ Not Sign
 \DeclareUnicodeCharacter{00AC}{\ifmmode\lnot\else\textlnot\fi}
 %… Horizontal Ellipsis
