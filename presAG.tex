@@ -1,0 +1,87 @@
+\documentclass[french,english]{beamer}
+
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+
+\definecolor{chocolate}{rgb}{0.82,0.41,0.12}
+\newcommand{\chocolate}[1]{\textcolor{chocolate}{#1}}
+
+\input{preamble/packages}
+\input{preamble/math_basics}
+\input{preamble/math_mine}
+\begin{document}
+
+
+
+%\frame{\titlepage}
+%\section[Outline]{}
+%\frame{\tableofcontents}
+
+
+\frame
+{
+  \frametitle{An internal Carbon taxe}
+
+\textbf{Goal:} The tax should \chocolate{reduce the emissions} of Lamsade while \chocolate{promoting low-carbon traveling behaviors}. 
+
+\
+
+  \begin{itemize}
+  \item \textbf{What is taxed?} Every \chocolate{mission} which goes through the Dauphine accounting services.
+  \item \textbf{How is it defined?} Given an \chocolate{amount of emissions} in CO2eq, the tax defines an \chocolate{additional price} that should be paid to the laboratory.
+  \item \textbf{Exceptions/Specificities?} Differences according to seniority or position ? E.g, junior researchers and students should have the possibility to travel more.
+  \end{itemize}
+}
+
+\begin{frame}{How is the collected money used ?}
+The money is used to \chocolate{promote low-carbon traveling behaviors}.
+
+\
+
+\begin{itemize} 
+    \item \textbf{Confort}: Pay for \chocolate{first class} tickets when choosing long travels by \chocolate{train}. 
+    \item \textbf{Compensation}: \chocolate{Compensate price difference} between plane and train/bus when low-carbon traveling means reveal more expensive.  
+    \item \textbf{Research}: Finance research initiatives (e.g., PhD position) on \chocolate{environmental research topics}.
+\end{itemize}	
+\end{frame}
+
+\begin{frame}{Definition of the taxe: an example}
+\textbf{Definition}:
+\begin{itemize}
+\item A trip $v$ at time $t$ induces emissions $\gamma(v) = c$ in TCO2eq.
+\item A sequence of $n$ trips induces a sequence $(c_1,t_1),\ldots,(c_n,t_n)$ of (emission, date) pairs.
+\item Given a trip $v_n$ and a history of trips $v_1,\ldots, v_{n-1}$, the taxe function $\tau$ returns a price in euros.  
+\end{itemize}
+
+\
+
+\textbf{Principles}:
+\begin{itemize}
+\item The more one pollutes, the more the taxe increases. 
+\item As time goes by the contribution of past trips to the taxe should vanish.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Definition of the taxe: an example}
+    \begin{itemize}
+    \item Given $a,b \in [n]$, define $l_a^{b} = \sum_{i = 0}^a c_i \lambda^{t_b - t_i}$.
+    \item Define $\alpha = 1 + \epsilon$ and $r = \frac{k}{\log(\alpha)}$.
+    \item The tax of $v_n$ is defined as: $$ \tau(v_n) = \int_{l_{n-1}^{t_n}}^{l_n^{t_n}} k \alpha^x dx = r (\alpha^{l_n^{t_n}} - \alpha^{l_{n - 1}^{t_n}}).$$
+    \end{itemize}	
+    
+    \
+
+   Comments:
+   \begin{itemize}
+   \item The taxe increases exponentially with emissions.
+   \item The contribution of past emissions vanishes exponentially with time.
+   \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Some simulations}
+    Half-life 2 years thus $\lambda^2 = 1/2$ thus $\lambda = \frac{\sqrt{2}}{2}$.
+    $\epsilon = ?$
+\end{frame}
+
+\end{document}
