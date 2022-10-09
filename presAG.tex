@@ -1,15 +1,45 @@
-\documentclass[french,english]{beamer}
-
-% \usepackage{beamerthemesplit} // Activate for custom appearance
-
-\definecolor{chocolate}{rgb}{0.82,0.41,0.12}
-\newcommand{\chocolate}[1]{\textcolor{chocolate}{#1}}
-
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[french, english]{beamer}
 \input{preamble/packages}
+\input{preamble/redac}
 \input{preamble/math_basics}
 \input{preamble/math_mine}
+\input{preamble/draw}
 \usepackage{tcolorbox}
+
+%\setbeamertemplate{headline}[singleline]
+%\setbeamertemplate{footline}[authortitle]
+
+\title[Title]{The title}
+\subject{Ze subject}
+\keywords{key, koy}
+\author{\emph{Olivier Cailloux} \inst{1} \and Name \inst{2}}
+\institute[LAMSADE]{\inst{1} LAMSADE, Université Paris-Dauphine \and \inst{2} Institute}
+\date{\formatdate{22}{1}{2019}}
+
 \begin{document}
+\begin{frame}[plain]
+	\tikz[remember picture,overlay]{
+		\path (current page.south west) node[anchor=south west, inner sep=0] {
+			\includegraphics[height=8mm]{Dauphine-Noir.png}
+		};
+		\path (current page.south east) node[anchor=south east, inner sep=0] {
+			\includegraphics[height=1cm]{LAMSADE95.jpg}
+		};
+		\path (current page.south) ++ (0, 4em) node[anchor=south, inner sep=0] {
+			\scriptsize\textcolor{blue}{\url{https://github.com/oliviercailloux/REPO}}
+		};
+%thanks to https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/13366414#13366414
+%REPO=…
+%curl -u 'oliviercailloux' https://api.github.com/user/repos -d "{\"name\":\"${REPO}\"}"
+%git remote add origin git@github.com:oliviercailloux/${REPO}.git
+%git push --set-upstream origin master
+	}
+	\titlepage
+\end{frame}
+\addtocounter{framenumber}{-1}
+
+\section{Context}
 
 
 
@@ -98,7 +128,7 @@ The money is used to \chocolate{promote low-carbon traveling behaviors}.
 \begin{frame}{Some simulations}
     Using a half-life of 2 years $\lambda = \frac{\sqrt{2}}{2}$; $\epsilon = 0.4$; $r = 847$.
     \begin{itemize}
-    	\item An isolated of 1.5 T (1500 km × 2)  \textrightarrow{} tax 138\,€.
+    	\item An isolated of 1.5 T (1500 km × 2) \textrightarrow{} tax 138\,€.
 	\item An isolated round-trip to Sydney (5.185\,T) \textrightarrow{} tax 4000\,€. This has a lasting effect: a 1.5\,T trip two years later is taxed 1330\,€, alternatively, a second round-trip to Sydney one year later is taxed 13\,735\,€.
 	\item Going to New-York (1.8\,T for the round-trip) every three months \textrightarrow{} tax (for the first round-trip) 710\,€, then 1200\,€, then 2100\,€, then 3300\,€, then 5000\,€, then 7500\,€, …
 	\item Repeated 1.5\,T trips every three months \textrightarrow{} taxes from 138\,€ (first trip) to 730\,€ (approximate limit).
