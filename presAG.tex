@@ -8,6 +8,7 @@
 \input{preamble/packages}
 \input{preamble/math_basics}
 \input{preamble/math_mine}
+\usepackage{tcolorbox}
 \begin{document}
 
 
@@ -47,9 +48,9 @@ The money is used to \chocolate{promote low-carbon traveling behaviors}.
 \begin{frame}{Definition of the taxe: an example}
 \textbf{Definition}:
 \begin{itemize}
-\item A trip $v$ at time $t$ induces emissions $\gamma(v) = c$ in TCO2eq.
-\item A sequence of $n$ trips induces a sequence $(c_1,t_1),\ldots,(c_n,t_n)$ of (emission, date) pairs.
-\item Given a trip $v_n$ and a history of trips $v_1,\ldots, v_{n-1}$, the taxe function $\tau$ returns a price in euros.  
+\item A trip $v$ at time $t$ induces \chocolate{emissions} $c$ in TCO2eq.
+\item A sequence of $n$ trips induces a \chocolate{sequence} $(c_1,t_1),\ldots,(t_n,c_n)$ of \chocolate{(date, emission) pairs}.
+\item Given a trip $v_n$ and a history of trips $v_1,\ldots, v_{n-1}$, \chocolate{the taxe function $\tau$ returns a price in euros}.  
 \end{itemize}
 
 \
@@ -57,7 +58,7 @@ The money is used to \chocolate{promote low-carbon traveling behaviors}.
 \textbf{Principles}:
 \begin{itemize}
 \item The more one pollutes, the more the taxe increases. 
-\item As time goes by the contribution of past trips to the taxe should vanish.
+\item As time goes by the \chocolate{contribution of past trips} to the taxe should \chocolate{vanish}.
 \end{itemize}
 \end{frame}
 
@@ -66,7 +67,7 @@ The money is used to \chocolate{promote low-carbon traveling behaviors}.
     \begin{itemize}
     \item Given $a,b \in [n]$, define $l_a^{b} = \sum_{i = 0}^a c_i \lambda^{t_b - t_i}$.
     \item Define $\alpha = 1 + \epsilon$ and $r = \frac{k}{\log(\alpha)}$.
-    \item The tax of $v_n$ is defined as: $$ \tau(v_n) = \int_{l_{n-1}^{t_n}}^{l_n^{t_n}} k \alpha^x dx = r (\alpha^{l_n^{t_n}} - \alpha^{l_{n - 1}^{t_n}}).$$
+    \item The tax of $v_n$ is defined as: \begin{tcolorbox}$$ \tau(v_n) = \int_{l_{n-1}^{t_n}}^{l_n^{t_n}} k \alpha^x dx = r (\alpha^{l_n^{t_n}} - \alpha^{l_{n - 1}^{t_n}}).$$\end{tcolorbox}
     \end{itemize}	
     
     \
