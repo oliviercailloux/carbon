@@ -7,15 +7,15 @@
 \input{preamble/draw}
 \usepackage{tcolorbox}
 
-%\setbeamertemplate{headline}[singleline]
+\setbeamertemplate{headline}[singleline]
 %\setbeamertemplate{footline}[authortitle]
 
-\title[Title]{The title}
-\subject{Ze subject}
-\keywords{key, koy}
-\author{\emph{Olivier Cailloux} \inst{1} \and Name \inst{2}}
-\institute[LAMSADE]{\inst{1} LAMSADE, Université Paris-Dauphine \and \inst{2} Institute}
-\date{\formatdate{22}{1}{2019}}
+\title[Proposal for a tax]{An internal carbon tax for the LAMSADE: a proposal}
+\subject{Carbon tax}
+\keywords{economics}
+\author{Olivier Cailloux \and Hugo Gilbert}
+\institute[LAMSADE]{LAMSADE, Université Paris-Dauphine, PSL}
+\date{\formatdate{11}{10}{2022}}
 
 \begin{document}
 \begin{frame}[plain]
@@ -26,14 +26,9 @@
 		\path (current page.south east) node[anchor=south east, inner sep=0] {
 			\includegraphics[height=1cm]{LAMSADE95.jpg}
 		};
-		\path (current page.south) ++ (0, 4em) node[anchor=south, inner sep=0] {
-			\scriptsize\textcolor{blue}{\url{https://github.com/oliviercailloux/REPO}}
-		};
-%thanks to https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/13366414#13366414
-%REPO=…
-%curl -u 'oliviercailloux' https://api.github.com/user/repos -d "{\"name\":\"${REPO}\"}"
-%git remote add origin git@github.com:oliviercailloux/${REPO}.git
-%git push --set-upstream origin master
+%		\path (current page.south) ++ (0, 4em) node[anchor=south, inner sep=0] {
+%			\scriptsize\textcolor{blue}{\url{https://github.com/oliviercailloux/REPO}}
+%		};
 	}
 	\titlepage
 \end{frame}
@@ -63,6 +58,7 @@
   \end{itemize}
 }
 
+\section{Use}
 \begin{frame}{How is the collected money used ?}
 The money is used to \chocolate{promote low-carbon traveling behaviors}.
 
@@ -75,6 +71,7 @@ The money is used to \chocolate{promote low-carbon traveling behaviors}.
 \end{itemize}	
 \end{frame}
 
+\section{Definition}
 \begin{frame}{Definition of the tax: an example}
 \textbf{Definition}:
 \begin{itemize}
@@ -110,6 +107,7 @@ The money is used to \chocolate{promote low-carbon traveling behaviors}.
 
 \end{frame}
 
+\section{Simulations}
 \begin{frame}{Some simulations}
     Using a half-life of 2 years $\lambda = \frac{\sqrt{2}}{2}$, and an $\epsilon = 0.1$
     
