@@ -162,6 +162,8 @@ Utilisation de l’argent de la taxe :
 - Financer des projets de recherche sur les thématiques environnementales
 
 \subsection{Exponential tax with discounting}
+Fix $λ \in (0, 1)$.
+
 Given $α, β \in \intvl{1, n}$, define $l_α^{t_β} = \sum_{i = 0}^α c_i \lambda^{t_β - t_i}$, 
 and let’s write $l_n = l_n^{t_n}$ for short.
 Define $l_0 = 0$.
@@ -175,6 +177,13 @@ Define $α = 1 + ε$ and $r = \frac{k}{\log(α)}$.
 The tax of $v_1$ is defined as $\tau(v_1) = \int_0^{c_1} k α^x dx = k \frac{α^{c_1} - 1}{\log(α)} = r (α^{c_1} - 1)$.
 
 The tax of $v_n$ is defined as $\tau(v_n) = \int_{l_{n - 1}^{t_n}}^{l_n} k α^x dx = r (α^{l_n^{t_n}} - α^{l_{n - 1}^{t_n}})$.
+
+Considering $t_i = id$ for some constant $d > 0$ and $c_i = c$ for some constant $c$, we have $l_{n - 1}^{t_n} = c \sum_{i = 0}^{n - 1} \lambda^{t_n - t_i} = c \sum_{i = 0}^{n - 1} \lambda^{d(n - i)} = c \sum_{i = 1}^n \lambda^{di} = c (\sum_{i = 0}^n \lambda^{di} - 1) = c (\frac{1 - λ^{dn}}{1 - λ^d} - 1) = c \frac{1 - λ^{dn} - 1 + λ^d}{1 - λ^d} = c \frac{λ^d}{1 - λ^d} - c \frac{λ^{dn}}{1 - λ^d}$. 
+Therefore, $τ(v_n) 
+= r α^{l_{n - 1}^{t_n}} (α^{c_n} - 1) 
+= r (α^c - 1) α^{c \frac{λ^d}{1 - λ^d}} α^{- c \frac{λ^{dn}}{1 - λ^d}}$.
+As $λ < 1$ and $d > 0$, $λ^d < 1$, thus $\lim_{n → ∞} λ^{dn} = 0$. 
+It follows that $\lim_{n → ∞} τ(v_n) = r (α^c - 1) α^{c \frac{λ^d}{1 - λ^d}}$.
 
 We also want to adjust $r$ and $ε$ according to the length of service (ancienneté) of the actor.
 
