@@ -40,88 +40,51 @@ In \cref{sec:alts}, we describe the decision space: the alternatives that we con
 We consider acts, which we consider as an action performed by an actor in some context. We use the term actor to refer to the person performing the action. We consider that a time period is fixed and only consider the acts performed within that time period.
 
 A \emph{pollution tax} 
-\footnote{We use the term pollution, for short, to refer to the kind of pollution that generates global warming effects, which includes but does not reduce to carbon emission. This is not to deny that other kinds of pollutions exist (that we do not consider here).} 
+\footnote{We use the term pollution, for short, to refer to the kind of pollution that generates global warming effects, which includes but does not reduce to carbon emission.} 
 can be modeled as a function that associates to each possible act a price in € (hereafter called the tax function); together with a method of using the revenue.
 
-An act can be described using a tuple constituted of the actor characteristics, the action characteristics and the context.
-The actor characteristics can be for example the stage of carrier of the actor performing the action.
-The action can be described by its usefulness, by its contribution to the normal expected activity of the actor (eg an archeologist may be required to visit some of its areas of specialty), by its pollutant emission… 
-Usefulness may mean usefulness for the laboratory, the society, the actor performing the action… It also needs to be specified how this usefulness is determined.
-Pollutant emissions may be measured using several dimensions (methane, carbon, other gases) or aggregated using some “carbon equivalent” metric.
-The context may include the set of acts performed by that actor previously, within some time period. (This permits to adjust the level of the tax non linearly wrt to repeated actions, for example.) It may also include the total amount of money available to the actor over some period (permitting to set the tax as a proportion of that budget).
+\subsection{Indicators}
+An indicator describes an act on some aspect on which the tax associated to the given act may depend.
 
-Although the tax price of an act may in principle also depend on the acts performed by other actors (the set of acts previously performed by anybody within a given time period would then be part of the context of each act), so as to allow for example tax rates that adjust dynamically depending on a pre-fixed collective target, we do not consider such subtleties here. Rather we consider that the tax function is designed for some time period with some objective in mind and then revised each time period.
-
-The tax function may be independent of one or several of these arguments 
+Indicators are about the actor characteristics, the action characteristics and the context.
+\begin{itemize}
+	\item Actor characteristics: the stage of carrier of the actor.
+	\item The total amount of money available to the actor over some period (permitting to set the tax as a proportion of that budget).
+	\item Action characteristics: its usefulness. Usefulness may mean usefulness for the laboratory, the society, the actor performing the action… It also needs to be specified how this usefulness is determined.
+	\item Its pollutant emission. Pollutant emissions may be measured using several dimensions (methane, carbon, other gases) or aggregated using some “carbon equivalent” metric.
+	\item Context: the set of actions performed by that actor previously, within some time period. (This permits to adjust the level of the tax non linearly wrt to repeated actions, for example.)
+	\item The contribution of the action to the normal expected activity of the actor. For example, an archeologist may be required to visit some of its areas of specialty.
+\end{itemize}
+The tax function may be independent of one or several of these arguments%
 \footnote{A function $f: A × B → C$ depends on $A$ iff $\exists a, a' \in A, b \in B \suchthat f(a, b) ≠ f(a', b)$; otherwise, $f$ is independent of $A$.} 
-so this model does not assume that all the listed aspects are to be considered relevant.
+so this model does not require considering all the listed aspects as relevant.
 
-A \emph{pollution quota} may be modeled as a function that associates to each possible act a binary decision: allowed or forbidden. Equivalently, it can be modeled as the set of allowed acts. Acts are supposedly described using the same aspects as above.
+Although the tax price of an act may in principle also depend on the acts performed by other actors (the set of actions performed by anybody within a given time period would then be part of the context of each act), so as to allow for example tax rates that adjust dynamically depending on a pre-fixed collective target, we do not consider such subtleties here. Rather we consider that the tax function is designed for some time period with some objective in mind and then revised each time period.
 
-\subsection{About quotas VS taxes}
-A quota function is equivalently modeled using a tax function, assuming that there is some monetary amount that nobody is able to pay, and that we write $\infty$. Such a function uses as codomain only the set $\set{0, \infty}$. Wlog, we thus only talk about tax functions in the rest of this article.
-
-We say that a tax function is non-binary iff its co-domain is different than $\set{0, \infty}$. Note that a tax function is binary iff it corresponds to what is ordinarily called a pollution quota.
-
-\section{What is done elsewhere?} 
-Using the bibliographic work of Stephanie Monjon. 
-
-\subsection{Tools to evaluate the carbon footprint}
-\begin{itemize}
-\item \emph{Universitetet i Bergen}: Implementation of a monitoring of emissions related to mobility with Quantified reduction targets. 
-\item \emph{Stockholm Environment Institute}: Staff emissions are being monitored and can be visualized. An online tool to perform these operations is under development.
-\end{itemize}
-
-\subsection{Emissions tracking tool and reduction targets}
-\begin{itemize}    
-\item \emph{ETH Zurich}: Each department defined a target for the reduction of air travel (until 2025, compared to a baseline of 2016-18) and agreed on measures to achieve them. These departments Collaborate with RooteRank to facilitate the comparison of different travel options and the booking of land trips. A travel agency associated with the university is currently trained to choose more environmental options when booking trips.
-\item \emph{Zurcher Hochschule der Kunste}: Each department has set its own targets and measures to reduce flight emissions by the end of 2019, exceeding the initial target of a 25\% reduction by the end of 2020 compared to a 2017 baseline.
-\end{itemize}
-
-\subsection{Offer advantages when traveling by bus or train}
-
-\begin{itemize}
-\item \emph{Universitat Autonoma of Barcelona}: For travels that take less than 10 hours, the employees are encouraged to take the train or the bus. ?These trips are presented by default to them and a travel by plane must be justified. Compensation measures are taken to increase the confort of employees choosing these modes of transport (first class, trips can be extended to add a personal trip to the professional one).
-\item \emph{University of Geneve}: Subventions are granted to fund first class tickets for trips by trains that take more than 4 hours. 
-\end{itemize}
-
-\subsection{Facilitate / Recommend low-emissive modes of transport}
-\begin{itemize}
-\item Many universities make it possible to use decision trees to help staff members in choosing their transport mean. 
-\item \emph{University of Utrecht}: A decision aiding tool was designed to help in choosing the transportation means chosen by the staff members. ?This tool takes in consideration the traveling time, the carbon footprint associated, and the number of  connections. Night trains and first class options are available. 
-\item \emph{EPFL}: The administrative staff received a formation about eco-friendly traveling options. EPFL has also conceived a tool making it possible to compare different traveling options on the criteria: cost, duration, carbon footprint.
-\end{itemize}
-
-\subsection{Carbon tax to finance green projects}
-\begin{itemize}
-\item \emph{Arizona State University}: Since 2018, a taxe of 15\$ for any plane round trip is applied. The money which is collected is used for green compensation projects.
-\item \emph{University of Neuchatel}: Since January 2019, a taxe is applied to all trips by planes. The money collected is used to fund activities related to sustainable development as well as projects reducing the carbon footprint of the university.
-\item \emph{KU Leuven}: All staff members can, on a voluntary basis, pay a tax of 40 euros by tons of CO2eq for all travels by plane. This money is invested in sustainable activities.
-\end{itemize}
-
-\subsection{Quotas on CO2 emissions}
-\begin{itemize}
-\item \emph{LOCEAN}: Annual individual quotas for the missions organized by the laboratory ($80\%$ of the lab members voted in favor of these quotas in September 2020). These quotas are set to 10 tons of emissions per person in 2021. Quotas are not exchangeable but 4tCO2 can be passed from a year to another. These quotas are meant to decrease with the objective to reduce by half the emissions by 2030. Several exceptions exist: field studies, trips for teaching purposes, and missions of more than 30 days. PhDs and postdocs benefit from an out-of-quota trip every 2 years.
-\end{itemize}
-
-\subsection{Forbid flights when alternatives exist}
-\begin{itemize}
-\item \emph{LOCEAN}: Since automn 2020, it is forbidden to take flights for trips that can be made in less than 5 hours by land means. 
-\item \emph{Vrije Universiteit Brussel}: It is forbidden to take flights for trips that can be made in less than 6 hours by land means. Exceptions can be made ?in exceptional circumstances. Avoiding planes is highly recommended for trips which can be made in less than 8 hours otherwise. 
-\item \emph{University College London}: Domestic flights are forbidden in the geography department. 
-\item \emph{HTW Berlin}: Since 2020, it is forbidden to take flights for trips that can be made in less than 6 hours by land means.
-\end{itemize}
-
- \section{Analysis}
+\section{Analysis}
 \label{sec:analysis}
 
 Considerations for designing the tax function.
 
-The tax function should be non decreasing with the level of carbon emission, and depend on it. 
-
 A tax has two effects on pollution. One may be named \emph{Reductionism}: it forbids some acts by reducing the available budget of the actor (this effect may occur even if not using $\infty$ prices). The other one may be named \emph{Reactionism}: by using the revenue gathered by the tax, the lab may perform actions that may reduce global warming.
 
-A tax may fail to use Reductionism, by design or unwantedly. This happens iff actors have enough budget to pay for the taxes and still perform the same actions they would have performed without the tax. A tax that fails to use Reductionism is sometimes considered “green washing”, because some believe that Reactionism has no significant impact on reducing the global warming problem.
+A tax may fail to use Reductionism, by design or unwantedly. This happens iff actors have enough budget to pay for the taxes and still perform the same actions they would have performed without the tax. A tax that fails to use Reductionism is sometimes considered “green washing”, because some believe that Reactionism has no significant impact on reducing the global warming effect.
+
+Taxes may spread efforts in a more or less egalitarian manner.
+
+\subsection{About quotas VS taxes}
+A \emph{pollution quota} may be modeled as a function that associates to each possible act a binary decision: allowed or forbidden. Equivalently, it can be modeled as the set of allowed acts. Acts are supposedly described using the same aspects as above.
+
+A quota function is equivalently modeled using a tax function, assuming that there is some monetary amount that nobody is able to pay, and that we write $\infty$. Such a function uses as codomain only the set $\set{0, \infty}$. Wlog, we thus only talk about tax functions in the rest of this article.
+
+We say that a tax function is non-binary iff its co-domain is different than $\set{0, \infty}$. Note that a tax function is binary iff it corresponds to what is ordinarily called a pollution quota.
+
+\subsection{Utility}
+Assume that each act is associated with $u_a \in (0, 1] \cap \Q$, its utility for the laboratory. For example, traveling to present an article in a prestigious conference might have a high utility, while traveling for visiting an obscure researcher for a very short period of time with no expected concrete scientific production might be judged of low utility.
+
+Given acts $a$ and $b$ and $n \in \N$, let $a + b$ denote performing acts $a$ then $b$ or $b$ then $a$ and $na$ denote performing $n$ times act $a$.
+We assume the utility does not change with order, thus $a + b$ is indifferent to $b + a$.
+Here we consider that act $a$ has utility $u_a$ and act $b$, $u_b$ iff the lab is indifferent between $xa$ and $yb$ for any $x, y$ such that $x u_a = y u_b$. For example, act $a$ has utility $1/2$ iff the lab is indifferent between $2a$ and an act of utility $1$. (This assumes that utility of acts for the lab is linear, in the sense that given acts $a$ and $b$ indifferent, and $c$ and $d$ indifferent, then $a + c$ is indifferent to $b + d$.)
 
 \subsection{Scope}
 An act $a$ is said to be taxed iff $f(a) ≠ 0$ (in other words, the taxed acts is the support of $f$).
@@ -218,6 +181,54 @@ For a smaller tax: divide $r$ by two, then all tax amounts get divided by two.
 %\bibliography{bibl}
 
 \appendix
+\section{What is done elsewhere?} 
+Using the bibliographic work of Stephanie Monjon. 
+
+\subsection{Tools to evaluate the carbon footprint}
+\begin{itemize}
+\item \emph{Universitetet i Bergen}: Implementation of a monitoring of emissions related to mobility with Quantified reduction targets. 
+\item \emph{Stockholm Environment Institute}: Staff emissions are being monitored and can be visualized. An online tool to perform these operations is under development.
+\end{itemize}
+
+\subsection{Emissions tracking tool and reduction targets}
+\begin{itemize}    
+\item \emph{ETH Zurich}: Each department defined a target for the reduction of air travel (until 2025, compared to a baseline of 2016-18) and agreed on measures to achieve them. These departments Collaborate with RooteRank to facilitate the comparison of different travel options and the booking of land trips. A travel agency associated with the university is currently trained to choose more environmental options when booking trips.
+\item \emph{Zurcher Hochschule der Kunste}: Each department has set its own targets and measures to reduce flight emissions by the end of 2019, exceeding the initial target of a 25\% reduction by the end of 2020 compared to a 2017 baseline.
+\end{itemize}
+
+\subsection{Offer advantages when traveling by bus or train}
+\begin{itemize}
+\item \emph{Universitat Autonoma of Barcelona}: For travels that take less than 10 hours, the employees are encouraged to take the train or the bus. ?These trips are presented by default to them and a travel by plane must be justified. Compensation measures are taken to increase the confort of employees choosing these modes of transport (first class, trips can be extended to add a personal trip to the professional one).
+\item \emph{University of Geneve}: Subventions are granted to fund first class tickets for trips by trains that take more than 4 hours. 
+\end{itemize}
+
+\subsection{Facilitate / Recommend low-emissive modes of transport}
+\begin{itemize}
+\item Many universities make it possible to use decision trees to help staff members in choosing their transport mean. 
+\item \emph{University of Utrecht}: A decision aiding tool was designed to help in choosing the transportation means chosen by the staff members. ?This tool takes in consideration the traveling time, the carbon footprint associated, and the number of  connections. Night trains and first class options are available. 
+\item \emph{EPFL}: The administrative staff received a formation about eco-friendly traveling options. EPFL has also conceived a tool making it possible to compare different traveling options on the criteria: cost, duration, carbon footprint.
+\end{itemize}
+
+\subsection{Carbon tax to finance green projects}
+\begin{itemize}
+\item \emph{Arizona State University}: Since 2018, a taxe of 15\$ for any plane round trip is applied. The money which is collected is used for green compensation projects.
+\item \emph{University of Neuchatel}: Since January 2019, a taxe is applied to all trips by planes. The money collected is used to fund activities related to sustainable development as well as projects reducing the carbon footprint of the university.
+\item \emph{KU Leuven}: All staff members can, on a voluntary basis, pay a tax of 40 euros by tons of CO2eq for all travels by plane. This money is invested in sustainable activities.
+\end{itemize}
+
+\subsection{Quotas on CO2 emissions}
+\begin{itemize}
+\item \emph{LOCEAN}: Annual individual quotas for the missions organized by the laboratory ($80\%$ of the lab members voted in favor of these quotas in September 2020). These quotas are set to 10 tons of emissions per person in 2021. Quotas are not exchangeable but 4tCO2 can be passed from a year to another. These quotas are meant to decrease with the objective to reduce by half the emissions by 2030. Several exceptions exist: field studies, trips for teaching purposes, and missions of more than 30 days. PhDs and postdocs benefit from an out-of-quota trip every 2 years.
+\end{itemize}
+
+\subsection{Forbid flights when alternatives exist}
+\begin{itemize}
+\item \emph{LOCEAN}: Since automn 2020, it is forbidden to take flights for trips that can be made in less than 5 hours by land means. 
+\item \emph{Vrije Universiteit Brussel}: It is forbidden to take flights for trips that can be made in less than 6 hours by land means. Exceptions can be made ?in exceptional circumstances. Avoiding planes is highly recommended for trips which can be made in less than 8 hours otherwise. 
+\item \emph{University College London}: Domestic flights are forbidden in the geography department. 
+\item \emph{HTW Berlin}: Since 2020, it is forbidden to take flights for trips that can be made in less than 6 hours by land means.
+\end{itemize}
+
 \section{Loose}
 a tax puts a price on carbon in order to reduce emissions, while a cap puts a limit on the quantity of emissions allowed, thus imputing a price.
 
@@ -252,7 +263,7 @@ Carbon taxes: a review of experience and policy design considerations JENNY SUMN
 Aldy et al. (Aldy, J.E., Ley, E., Parry, I., 2008, ‘A tax-based approach to slowing global climate change’, National Tax Journal 61(3),
 493 – 517, 10.17310/ntj.2008.3.09) discuss the design of carbon taxes
 at the domestic level, suggesting that the efficient near-term tax is at least \$5 – 20 per tonne of CO 2 and
-that the tax should be placed on upstream sources (Read by OC).
+that the tax should be placed on upstream sources (Read by OC). (Discuss appropriate tax levels depending on discouting or supposed risks.)
  
 Aldy and Pizer (Aldy, J.E., Pizer, W.A., 2009, ‘Issues in designing U.S. climate change policy’, Energy Journal 30(3), 179 – 209.) summarize the litera-
 ture on the distributional impacts of carbon taxes, suggesting that recycling revenue to consumers can
@@ -263,6 +274,10 @@ carbon tax revenue to consumers, and found that a lump sum per capita payment of
 carbon tax progressive.
 
 The ultimate design of a carbon tax is subject to the political process, and is thus unlikely to match the theoretically optimal design (see del Río and Labanderia, 2009).
+
+A classification framework for carbon tax revenue use
+Lee-Ann Steenkamp
+https://doi.org/10.1080/14693062.2021.1946381 
 
 \section{History}
 In the early 1990s, carbon taxes emerged
