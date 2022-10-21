@@ -63,7 +63,6 @@ Although the tax price of an act may in principle also depend on the acts perfor
 
 \section{Analysis}
 \label{sec:analysis}
-
 Considerations for designing the tax function.
 
 A tax has two effects on pollution. One may be named \emph{Reductionism}: it forbids some acts by reducing the available budget of the actor (this effect may occur even if not using $\infty$ prices). The other one may be named \emph{Reactionism}: by using the revenue gathered by the tax, the lab may perform actions that may reduce global warming.
@@ -71,6 +70,27 @@ A tax has two effects on pollution. One may be named \emph{Reductionism}: it for
 A tax may fail to use Reductionism, by design or unwantedly. This happens iff actors have enough budget to pay for the taxes and still perform the same actions they would have performed without the tax. A tax that fails to use Reductionism is sometimes considered “green washing”, because some believe that Reactionism has no significant impact on reducing the global warming effect.
 
 Taxes may spread efforts in a more or less egalitarian manner.
+
+\subsection{Welfare}
+We assume a pre-existing welfare ordering, as follows. The lab has some budget and some preference over which bundles of acts to fit into that budget. Thus given two feasible (that is, within budget) bundles of acts $(a_1, …)$ and $(b_1, …)$, the lab allocates using $\succeq$. (TODO replace with a choice function.)
+
+Let $M$ be the lab budget. The feasible bundles are the bundles $B = (a_i)$ such that $\sum c_i ≤ M$, with $c_i$ the bare cost of action $a_i$.
+
+How to maximize welfare under capped CO²? That is, some set $H$ of bundles is excluded for reason of high CO², and we want to allocate so as to find the highest possible bundle apart from $H$ among the possible ones, that is, the ones that are on the table. Thus define a set $T$ of bundles (the ones that the lab sees). We want to ensure that we select a $\succeq$-maximal point of $T \setminus H$.
+
+Define the tax-feasible bundles as the bundles $B = (a_i)$ such that $\sum c_i + \tau_i ≤ M$.
+We consider only functions $\tau$ such that the tax-feasible bundles are suitably capped.
+
+\begin{theorem}
+	Under suitable hypothesis, a flat tax is most efficient.
+\end{theorem}
+\begin{proof}[Intuition]
+	Assume $\tau$ is not linear. To build the intuition, consider a constant tax. Consider actions $a_1$ at 1T CO², 0 € bare cost and $a_2$ at 100 kg CO², 0 € bare cost, taxed the same. Assume $a_1$ has slightly better welfare than $a_2$.
+	Assume the budget is 1.1T and 1.1 k€. We need to set the constant tax to 550 €. But the welfare would be higher with $11 a_2$ (now infeasible). No, set the constant tax to 100 €. Then $a_1 + 10 a_2$ is within monetary budget and welfare optimal but out of pollution budget, so that’s rejected. There is no constant tax such that the best feasible point is $11 a_2$.
+\end{proof}
+		
+A flat tax may spread carbon efforts in a non egalitarian way. Assume $\succeq$ has no egalitarian concerns (for example, it funds only according to cost and prestige of the venue).
+Intuition. Person $P_1$ does 10 times action $a$ and person $P_2$ does 10 times action $a'$, with $a'$ an action that costs 1.1 and pollutes 1.1 as much as $a$ but that is as prestigious as $a$. These 20 actions are feasible under the given budget. Now with a flat tax that makes this bundle infeasible, the lab might want to remove as many $a'$ as necessary without touching the actions of $P_1$. This puts all carbon efforts on $P_2$.
 
 \subsection{About quotas VS taxes}
 A \emph{pollution quota} may be modeled as a function that associates to each possible act a binary decision: allowed or forbidden. Equivalently, it can be modeled as the set of allowed acts. Acts are supposedly described using the same aspects as above.
@@ -80,11 +100,18 @@ A quota function is equivalently modeled using a tax function, assuming that the
 We say that a tax function is non-binary iff its co-domain is different than $\set{0, \infty}$. Note that a tax function is binary iff it corresponds to what is ordinarily called a pollution quota.
 
 \subsection{Utility}
+Action $a_1$ with bare cost $b_1$ and $a_2$ with $b_2$. And $u_1 = 1$, $u_2 = 1/2$.
+Should we tax using utility?
+
+Lab sees actions and decides about funding considering utility and taxed cost. Say that taxes without utility are $t_1$ and $t_2$ and with utility are $t_1 + t'_1$ and $t_2 + t'_2$. Let $c_i = b_i + t_i$.
+
+So the lab sees in the independent case: $(a_1, c_1)$ VS $(a_2, c_2)$. Say that $(a_1, c_1)$ is equivalent to $(a_2, c'_2)$.
+
 Assume that each act is associated with $u_a \in (0, 1] \cap \Q$, its utility for the laboratory. For example, traveling to present an article in a prestigious conference might have a high utility, while traveling for visiting an obscure researcher for a very short period of time with no expected concrete scientific production might be judged of low utility.
 
 Given acts $a$ and $b$ and $n \in \N$, let $a + b$ denote performing acts $a$ then $b$ or $b$ then $a$ and $na$ denote performing $n$ times act $a$.
 We assume the utility does not change with order, thus $a + b$ is indifferent to $b + a$.
-Here we consider that act $a$ has utility $u_a$ and act $b$, $u_b$ iff the lab is indifferent between $xa$ and $yb$ for any $x, y$ such that $x u_a = y u_b$. For example, act $a$ has utility $1/2$ iff the lab is indifferent between $2a$ and an act of utility $1$. (This assumes that utility of acts for the lab is linear, in the sense that given acts $a$ and $b$ indifferent, and $c$ and $d$ indifferent, then $a + c$ is indifferent to $b + d$.)
+Here we consider that act $a$ has utility $u_a$ and act $b$, $u_b$ iff the lab is indifferent between $xa$ and $yb$ for any $x, y$ such that $x u_a = y u_b$. For example, act $a$ has utility $1/2$ iff the lab is indifferent between $2a$ and an act of utility $1$. We assume that utility of acts for the lab is linear, in the sense that given acts $a$ and $b$ indifferent, and $c$ and $d$ indifferent, then $a + c$ is indifferent to $b + d$.
 
 \subsection{Scope}
 An act $a$ is said to be taxed iff $f(a) ≠ 0$ (in other words, the taxed acts is the support of $f$).
@@ -278,6 +305,8 @@ The ultimate design of a carbon tax is subject to the political process, and is 
 A classification framework for carbon tax revenue use
 Lee-Ann Steenkamp
 https://doi.org/10.1080/14693062.2021.1946381 
+
+See also: https://www.allocationclimat.fr/
 
 \section{History}
 In the early 1990s, carbon taxes emerged
