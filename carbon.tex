@@ -37,13 +37,16 @@ In \cref{sec:alts}, we describe the decision space: the alternatives that we con
 
 \section{Decision space}
 \label{sec:alts}
-We consider acts, which we consider as an action performed by an actor in some context. We use the term actor to refer to the person performing the action. We consider that a time period is fixed and only consider the acts performed within that time period.
+We consider acts, which we consider as an action performed by an actor in some context. 
+Let $\allacts$ denote the set of acts.
+We use the term actor to refer to the person performing the action. We consider that a time period is fixed and only consider the acts performed within that time period.
 
 A \emph{pollution tax} 
 \footnote{We use the term pollution, for short, to refer to the kind of pollution that generates global warming effects, which includes but does not reduce to carbon emission.} 
 can be modeled as a function that associates to each possible act a price in € (hereafter called the tax function); together with a method of using the revenue.
 
 \subsection{Indicators}
+\label{sec:indic}
 An indicator describes an act on some aspect on which the tax associated to the given act may depend.
 
 Indicators are about the actor characteristics, the action characteristics and the context.
@@ -72,11 +75,91 @@ A tax may fail to use Reductionism, by design or unwantedly. This happens iff ac
 Taxes may spread efforts in a more or less egalitarian manner.
 
 \subsection{Welfare}
-We assume a pre-existing welfare ordering, as follows. The lab has some budget and some preference over which bundles of acts to fit into that budget. Thus given two feasible (that is, within budget) bundles of acts $(a_1, …)$ and $(b_1, …)$, the lab allocates using $\succeq$. (TODO replace with a choice function.)
+The lab has a budget $M$ (in €).
+We call bundle a finite set of acts, denoted generically as $B$.
+The set of all bundles $\allbundles$ is the set of finite sets of acts (including the empty set).
+The lab has a welfare ordering $\succeq$ (a weak order) over the set of all bundles.
+Recall that each act $a$ has a bare cost $c_a = c(a)$ (in €) and its main action $α$ has a pollution level $p(α) = p_a = p(a)$ (in CO²).
+A bundle is raw-cost-feasible iff $\sum c_a ≤ M$.
+The lab has a carbon target $H$ (in CO²).
+A bundle is CO²-feasible iff $\sum p_a ≤ H$.
+Let $T \subseteq \allbundles$ denote the set of possible bundles (the ones that the lab may choose among).
+Let $F \subseteq T$ denote the a priori feasible bundles, meaning, the bundles of $T$ which are raw-cost-feasible and CO²-feasible.
+Let $τ: \allacts → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)
+A cap is a value $M' ≥ M$.
+A bundle is tax-feasible (for a given cap $M'$) iff $\sum c_a + τ_a ≤ M'$.
 
-Let $M$ be the lab budget. The feasible bundles are the bundles $B = (a_i)$ such that $\sum c_i ≤ M$, with $c_i$ the bare cost of action $a_i$.
+\begin{remark}
+	An act as understood here represents an action together with its context (see \cref{sec:indic}), the context including the previous actions of the same actor, therefore, two (real life) acts can’t have the exact same description in our model.
+\end{remark}
 
-How to maximize welfare under capped CO²? That is, some set $H$ of bundles is excluded for reason of high CO², and we want to allocate so as to find the highest possible bundle apart from $H$ among the possible ones, that is, the ones that are on the table. Thus define a set $T$ of bundles (the ones that the lab sees). We want to ensure that we select a $\succeq$-maximal point of $T \setminus H$.
+\subsection{Utility per act}
+As a first possible procedure, we suppose that the lab associates a utility $u(a)$ to every act and decides to grant the act $a$ according to some function $f(u(a), c(a) + τ(a)) \in \set{0, 1}$. An act $a$ is granted iff $f(u(a), c(a) + τ(a)) = 1$.
+
+We wonder in which conditions $\forall {\succeq}, T, M, H \suchthat F ≠ \emptyset: \exists τ, M', f$ such that the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+
+I believe that with no constraint on $τ$ or $f$, the answer is: always.
+Consider $B \in \max_F {\succeq}$.
+Define $M' = M$. Put an infinite tax on every act not in $B$ and a zero tax on the acts in $B$.
+
+An act $a$ containing actions $(α_i)$ weakly Pareto-dominates another act $a'$ (with actions $(α'_i)$) iff they contain the same number of actions and $\forall i: p(α_i) ≤ p(α'_i) \land u(a) ≥ u(a') \land c(a) ≤ c(a')$.
+$τ$ is weakly Pareto iff it does not increase for an act that weakly pareto-dominates another act.
+$f$ is weakly Pareto iff it does not decrease on its first argument and does not increase on its second argument.
+
+In which conditions are $τ$ and $f$ weakly Pareto (WP)?
+
+\begin{example}
+	$F = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
+	$a$ pareto-dominates the other two,
+	$u(a_1) = 0.8, u(a_2) = 0.8, u(a) = 1$, 
+	$B_1 \succ B_2$,
+	pollution and raw costs of all acts are equal.
+
+	We want to select $B_1$.
+	Need to put a strictly higher tax on $a$ otherwise by $f$ being weakly pareto, $a$ will be taken.
+	Thus there is no weakly Pareto $(τ, f)$.
+\end{example}
+Defining $g(u(a), c(a)) \in \set{0, 1}$ as a function of $u$ and $c$ (not of $τ$), note that in this example, there is also no $g$ that selects the right bundle, so it’s not “the tax’ fault”.
+A more meaningful question would ensure that $u$ and $g$ appropriately maximise $\succeq$.
+$g$ is weakly Pareto iff it does not decrease on its first argument and does not increase on its second argument.
+
+We thus wonder in which conditions $\forall {\succeq}, T, M, H \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: $\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+
+This is not guaranteed.
+\begin{example}
+	$F = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
+	$u(a_1) = u(a_2) = 1, u(a) = 0.5$;
+	all acts contain only one action;
+	$p(a_1) = p(a_2) = 2T$; $p(a) = 3T$; $H = 3T$; and raw costs of all acts are equal.
+	$B_1 \succ B_2$.
+	Any $g$ WP will pick $B_1$.
+	We want to select $B_2$ (as $B_1$ is not CO²-feasible).
+	This requires a higher tax on $a_i$ than on $a$, which violates WP.
+\end{example}
+
+Now assume that $T$ is downwards-closed, meaning that $B \in T ⇒ \forall b \in B: B \setminus \set{b} \in T$.
+
+Does it hold that $\forall {\succeq}, T \text{ downwards closed}, M, H \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: $\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+
+I think that this holds. To be checked.
+
+\subsection{Draft}
+Here are some examples which might contribute answering some questions.
+\begin{example}
+	$T = \set{B_1, B_2}$ with $B_1 = B_2 \cup \set{a}$, with $a$ being top utility and low cost; then I would have to reject $a$ because it doesn’t fit the budget.
+	We might have to mandate that $T$ be closed by exclusion of an element.
+\end{example}
+
+\begin{example}
+	Consider acts $a$ good (in utility and CO²), $b, c$ average (in utility and CO²) and $d$ bad (in utility and CO²), all with the same bare cost, yielding the Pareto relation $a > b, a > c, b > d, c > d$.
+	Consider $T = \set{\set{a, c}, \set{b, d}, \set{a}, \set{b}, \set{c}, \set{d}, \emptyset}$. 
+	Consider $\set{a, c} \succ \set{b, d} \succ \set{a} \succ \set{b} \succ \set{c} \succ \set{d} \succ \emptyset$ (as determined by considering that $\succeq$ sums utilities).
+	Assume that all bundles of $T$ are raw-cost-feasible.
+	Consider $\set{b, d}$ over the CO² budget.
+	
+	We need a tax that makes $b$ and $d$ rejected but accepts $c$.
+	This seems to require violating pareto-dominance.
+\end{example}
 
 Define the tax-feasible bundles as the bundles $B = (a_i)$ such that $\sum c_i + \tau_i ≤ M$.
 We consider only functions $\tau$ such that the tax-feasible bundles are suitably capped.
@@ -241,6 +324,9 @@ Using the bibliographic work of Stephanie Monjon.
 \item \emph{University College London}: Domestic flights are forbidden in the geography department. 
 \item \emph{HTW Berlin}: Since 2020, it is forbidden to take flights for trips that can be made in less than 6 hours by land means.
 \end{itemize}
+
+\section{Better analysis}
+Replace the welfare ordering by a choice function to relax hypothesis.
 
 \section{Loose}
 a tax puts a price on carbon in order to reduce emissions, while a cap puts a limit on the quantity of emissions allowed, thus imputing a price.
