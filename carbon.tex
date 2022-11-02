@@ -76,30 +76,30 @@ Taxes may spread efforts in a more or less egalitarian manner.
 
 \subsection{Welfare}
 
-Recall that $\allacts$ denotes the set of \emph{acts}, where an act is an action performed by an actor in some context. 
-We call \emph{bundle} a finite set of acts, denoted generically as $B$.
-The set of all bundles $\allbundles$ is the set of finite sets of acts (including the empty set).
+We denote by $\allacts = \allOperations \times \allMembers$ the set of \emph{acts}, where an act $a$ is a tuple $a = (o,m)$, where $o$  is the operation performed, and $m$ is the lab member performing it; $\allOperations$ denotes the set of all possible operations and $\allMembers$ denotes the set of all lab members. By abuse of notation, we denote by $o(a)$ and $m(a)$ the first and second components of act $a$. \HG{Probablement, quand les fonctions dépendent du membre (coût, taxe) elles ne devraient dépendre que du rang de la personne.}
 
-\begin{remark}
-	An act as understood here represents an action together with its context (see \cref{sec:indic}), the context including the previous actions of the same actor, therefore, two (real life) acts can’t have the exact same description in our model.
-\end{remark}
+We call \emph{history} a finite sequence of acts, denoted generically as $H$. 
+We assume that all elements of a history are different. 
+The set of all histories $\allHistories$ is the set of finite sequences of acts (including the empty sequence). 
+Given a history $H$ and a lab member $m$, we denote by $H^{m}$, the sub-sequence of $H$ compounded of all acts $a\in H$ such that $m(a) = m$. 
 
-The lab would like to choose the best bundle of acts to perform among a set $T \subseteq \allbundles$ which denote the set of possible bundles for the current year; her preferences is described by a \emph{welfare ordering} $\succeq$ (a weak order) over $\allbundles$.
-However, recall that each act $a$ has a bare cost $c_a = c(a)$ (in €) and its main action $α$ has a pollution level $p(α) = p_a = p(a)$ (in CO²eq). 
-The choices of the lab are restricted by a budget $M$ in € (hard constraint) and a carbon target $H$ in CO²eq (soft constraint).
+The lab would like to choose the best history of acts to realize among a set $T \subseteq \allHistories$ which denote the set of possible histories for the current year; her preferences is described by a \emph{welfare ordering} $\succeq$ (a linear order) over $\allHistories$.
+However, recall that each act $a$ has a bare cost $c(a)$ (in €) and its action $o(a)$ has a pollution level $p(o(a)) = p(a)$ (in CO²eq). 
+The choices of the lab are restricted by a budget $M$ in € and a carbon budget $C$ in CO²eq.
 
-A bundle $B$ is \emph{raw-cost-feasible} iff $\sum_{a\in B} c_a ≤ M$; it is \emph{CO²-feasible} iff $\sum_{a\in B} p_a ≤ H$.
-Let $F \subseteq T$ denote the \emph{a priori feasible} bundles, meaning, the bundles of $T$ which are raw-cost-feasible and CO²-feasible.
+A history $H$ is \emph{raw-cost-feasible} iff $\sum_{a\in H} c(a) ≤ M$; it is \emph{CO²-feasible} iff $\sum_{a\in H} p(a) ≤ C$.
+Let $F \subseteq T$ denote the \emph{a priori feasible} histories, meaning, the ones of $T$ which are raw-cost-feasible and CO²-feasible.
 
-The lab would like to design a tax function to ensure ()
-Let $τ: \allacts → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)
+The lab would like to design a tax function to maximize welfare under the budget constraints. 
+Let $τ: \allHistories → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)  
+Given a history $H$, the taxe function only depends only on the subsequence $H^{m}$ where $m = m(H_{|H|})$ is the lab member making the last operation in the history, $\tau(H) = \tau(H^{m})$. 
 A cap is a value $M' ≥ M$.
-A bundle $B$ is tax-feasible (for a given cap $M'$) iff $\sum_{a\in B} (c_a + τ_a) ≤ M'$.
+A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} (c_a) + τ(H) ≤ M'$.
 
 
 
 \subsection{Utility per act}
-As a first possible procedure, we suppose that the lab associates a utility $u(a)$ to every act and decides to grant the act $a$ according to some function $f(u(a), c(a) + τ(a)) \in \set{0, 1}$. An act $a$ is granted iff $f(u(a), c(a) + τ(a)) = 1$.
+We suppose that the lab associates a utility $u(H)$ to every history (\HG{is $u$, linear, submodular, should we consider the utility of the sequence or the increment in utility.}) and decides to grant the act $a$ according to some function $f(u(a), c(a) + τ(a)) \in \set{0, 1}$. An act $a$ is granted iff $f(u(a), c(a) + τ(a)) = 1$.
 
 We wonder in which conditions $\forall {\succeq}, T, M, H \suchthat F ≠ \emptyset: \exists τ, M', f$ such that the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
@@ -114,7 +114,7 @@ $f$ is weakly Pareto iff it does not decrease on its first argument and does not
 In which conditions are $τ$ and $f$ weakly Pareto (WP)?
 
 \begin{example}
-	$F = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
+	$T = F = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
 	$a$ pareto-dominates the other two,
 	$u(a_1) = 0.8, u(a_2) = 0.8, u(a) = 1$, 
 	$B_1 \succ B_2$,
@@ -132,19 +132,19 @@ We thus wonder in which conditions $\forall {\succeq}, T, M, H \suchthat F ≠ \
 
 This is not guaranteed.
 \begin{example}
-	$F = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
+	$T = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
 	$u(a_1) = u(a_2) = 1, u(a) = 0.5$;
 	all acts contain only one action;
-	$p(a_1) = p(a_2) = 2T$; $p(a) = 3T$; $H = 3T$; and raw costs of all acts are equal.
+	$p(a_1) = p(a_2) = 2T$; $p(a) = 3T$; $H = 3T$; and raw costs of all acts are equal, as a result $F = \{B_2\}$.
 	$B_1 \succ B_2$.
 	Any $g$ WP will pick $B_1$.
 	We want to select $B_2$ (as $B_1$ is not CO²-feasible).
 	This requires a higher tax on $a_i$ than on $a$, which violates WP.
 \end{example}
 
-Now assume that $T$ is downwards-closed, meaning that $B \in T ⇒ \forall b \in B: B \setminus \set{b} \in T$.
+Now assume that $T$ is \emph{downwards-closed}, meaning that $B \in T ⇒ \forall b \in B: B \setminus \set{b} \in T$.
 
-Does it hold that $\forall {\succeq}, T \text{ downwards closed}, M, H \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: $\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+Does it hold that $\forall {\succeq}, T \text{ downwards-closed}, M, H \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: $\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
 I think that this holds. To be checked.
 
