@@ -75,23 +75,28 @@ A tax may fail to use Reductionism, by design or unwantedly. This happens iff ac
 Taxes may spread efforts in a more or less egalitarian manner.
 
 \subsection{Welfare}
-The lab has a budget $M$ (in €).
-We call bundle a finite set of acts, denoted generically as $B$.
+
+Recall that $\allacts$ denotes the set of \emph{acts}, where an act is an action performed by an actor in some context. 
+We call \emph{bundle} a finite set of acts, denoted generically as $B$.
 The set of all bundles $\allbundles$ is the set of finite sets of acts (including the empty set).
-The lab has a welfare ordering $\succeq$ (a weak order) over the set of all bundles.
-Recall that each act $a$ has a bare cost $c_a = c(a)$ (in €) and its main action $α$ has a pollution level $p(α) = p_a = p(a)$ (in CO²).
-A bundle is raw-cost-feasible iff $\sum c_a ≤ M$.
-The lab has a carbon target $H$ (in CO²).
-A bundle is CO²-feasible iff $\sum p_a ≤ H$.
-Let $T \subseteq \allbundles$ denote the set of possible bundles (the ones that the lab may choose among).
-Let $F \subseteq T$ denote the a priori feasible bundles, meaning, the bundles of $T$ which are raw-cost-feasible and CO²-feasible.
-Let $τ: \allacts → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)
-A cap is a value $M' ≥ M$.
-A bundle is tax-feasible (for a given cap $M'$) iff $\sum c_a + τ_a ≤ M'$.
 
 \begin{remark}
 	An act as understood here represents an action together with its context (see \cref{sec:indic}), the context including the previous actions of the same actor, therefore, two (real life) acts can’t have the exact same description in our model.
 \end{remark}
+
+The lab would like to choose the best bundle of acts to perform among a set $T \subseteq \allbundles$ which denote the set of possible bundles for the current year; her preferences is described by a \emph{welfare ordering} $\succeq$ (a weak order) over $\allbundles$.
+However, recall that each act $a$ has a bare cost $c_a = c(a)$ (in €) and its main action $α$ has a pollution level $p(α) = p_a = p(a)$ (in CO²eq). 
+The choices of the lab are restricted by a budget $M$ in € (hard constraint) and a carbon target $H$ in CO²eq (soft constraint).
+
+A bundle $B$ is \emph{raw-cost-feasible} iff $\sum_{a\in B} c_a ≤ M$; it is \emph{CO²-feasible} iff $\sum_{a\in B} p_a ≤ H$.
+Let $F \subseteq T$ denote the \emph{a priori feasible} bundles, meaning, the bundles of $T$ which are raw-cost-feasible and CO²-feasible.
+
+The lab would like to design a tax function to ensure ()
+Let $τ: \allacts → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)
+A cap is a value $M' ≥ M$.
+A bundle $B$ is tax-feasible (for a given cap $M'$) iff $\sum_{a\in B} (c_a + τ_a) ≤ M'$.
+
+
 
 \subsection{Utility per act}
 As a first possible procedure, we suppose that the lab associates a utility $u(a)$ to every act and decides to grant the act $a$ according to some function $f(u(a), c(a) + τ(a)) \in \set{0, 1}$. An act $a$ is granted iff $f(u(a), c(a) + τ(a)) = 1$.
