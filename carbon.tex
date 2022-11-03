@@ -75,13 +75,19 @@ A tax may fail to use Reductionism, by design or unwantedly. This happens iff ac
 Taxes may spread efforts in a more or less egalitarian manner.
 
 \subsection{Welfare}
+Given an integer $i \in \mathbb{N}$, we use $[n]$ to denote the set $\{1,\ldots, n\}$. 
 
 We denote by $\allacts = \allOperations \times \allMembers$ the set of \emph{acts}, where an act $a$ is a tuple $a = (o,m)$, where $o$  is the operation performed, and $m$ is the lab member performing it; $\allOperations$ denotes the set of all possible operations and $\allMembers$ denotes the set of all lab members. By abuse of notation, we denote by $o(a)$ and $m(a)$ the first and second components of act $a$. \HG{Probablement, quand les fonctions dépendent du membre (coût, taxe) elles ne devraient dépendre que du rang de la personne.}
 
-We call \emph{history} a finite sequence of acts, denoted generically as $H$. 
-We assume that all elements of a history are different. 
-The set of all histories $\allHistories$ is the set of finite sequences of acts (including the empty sequence). 
+We call \emph{history} a finite sequence of non-repeated acts, denoted generically as $H$. 
+The set of all histories $\allHistories$ is the set of finite sequences of acts (including the empty sequence $()$). 
+
+We define some notations on histories. 
+Given a history $H = (a_1,\ldots,a_n)$ and an act $a\not\in H$, we use $H\circ a$ to  denote the history $(a_1,\ldots, a_n, a)$. 
+Given a history $H = (a_1,\ldots,a_n)$ and a set $S\subseteq [n]$, we use $H_S$ to denote the sequence that is constructed by using the acts of $H$ of indices in $S$; by abuse of notation we use $H_i$ in places of $H_{\{i\}}$. 
 Given a history $H$ and a lab member $m$, we denote by $H^{m}$, the sub-sequence of $H$ compounded of all acts $a\in H$ such that $m(a) = m$. 
+Given histories $H$ and $H'$, we write $H'\subseteq H$ iff $H'$ is a subsequence of $H$.
+Given $U \subseteq \allacts$,  we use $H - U$ to denote the sequence that is constructed by removing the elements in $U$ from history $H$ without changing the order of the remaining elements.
 
 The lab would like to choose the best history of acts to realize among a set $T \subseteq \allHistories$ which denote the set of possible histories for the current year; her preferences is described by a \emph{welfare ordering} $\succeq$ (a linear order) over $\allHistories$.
 However, recall that each act $a$ has a bare cost $c(a)$ (in €) and its action $o(a)$ has a pollution level $p(o(a)) = p(a)$ (in CO²eq). 
@@ -96,55 +102,62 @@ Given a history $H$, the taxe function only depends only on the subsequence $H^{
 A cap is a value $M' ≥ M$.
 A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} (c_a) + τ(H) ≤ M'$.
 
-
-
 \subsection{Utility per act}
-We suppose that the lab associates a utility $u(H)$ to every history (\HG{is $u$, linear, submodular, should we consider the utility of the sequence or the increment in utility.}) and decides to grant the act $a$ according to some function $f(u(a), c(a) + τ(a)) \in \set{0, 1}$. An act $a$ is granted iff $f(u(a), c(a) + τ(a)) = 1$.
+We suppose that the lab associates a utility $u(H)$ to every history (\HG{is $u$, linear, submodular, should we consider the utility of the sequence or the increment in utility.}) such that $u(()) = 0$. 
+The lab decides to grant the act $a$ given history $H$ according to some function $f(u(H \circ a) - u(H), c(a) + τ(H\circ a)) \in \set{0, 1}$. An act $a$ is granted given history $H$ iff $f(u(H \circ a) - u(H), c(a) + τ( H \circ a)) = 1$. A history $H$ is granted if $H_i$ is granted given $H_{[i-1]}$ for all $i$ in $[|H|]$.
 
-We wonder in which conditions $\forall {\succeq}, T, M, H \suchthat F ≠ \emptyset: \exists τ, M', f$ such that the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+We wonder in which conditions we obtain the following property: 
+
+$\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset: (P1)  \exists τ, M', f$ such that the maximal sequences of granted acts constitute sequences that constitute a non-empty prefix of $\succeq_{[F]}$ and are tax-feasible. 
+We may also require that there is only one maximal sequences of granted acts.
 
 I believe that with no constraint on $τ$ or $f$, the answer is: always.
 Consider $B \in \max_F {\succeq}$.
-Define $M' = M$. Put an infinite tax on every act not in $B$ and a zero tax on the acts in $B$.
+Define $M' = M$ and $\tau(H) = 0$ if $H\subseteq B$ and $\infty$ otherwise. 
 
-An act $a$ containing actions $(α_i)$ weakly Pareto-dominates another act $a'$ (with actions $(α'_i)$) iff they contain the same number of actions and $\forall i: p(α_i) ≤ p(α'_i) \land u(a) ≥ u(a') \land c(a) ≤ c(a')$.
-$τ$ is weakly Pareto iff it does not increase for an act that weakly pareto-dominates another act.
+An act $a$ given $H$ \emph{weakly Pareto-dominates} another act $a'$ given $H'$ iff $|H^{m(a)}| = |H'^{m(a')}|$ 
+and $\forall i: p(H^{m(a)}_i) ≤ p(H'^{m(a')}_i) \land u(H \circ a) - u(H) ≥ u(H'\circ a') - u(H') \land p(a) ≤ p(a') \land c(a) ≤ c(a')$.
+
+$τ$ is weakly Pareto iff $\tau(H \circ a) \le \tau(H' \circ a')$ when $a$ given $H$ weakly pareto-dominates $a'$ given $H'$.
 $f$ is weakly Pareto iff it does not decrease on its first argument and does not increase on its second argument.
 
 In which conditions are $τ$ and $f$ weakly Pareto (WP)?
 
 \begin{example}
-	$T = F = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
-	$a$ pareto-dominates the other two,
-	$u(a_1) = 0.8, u(a_2) = 0.8, u(a) = 1$, 
-	$B_1 \succ B_2$,
+	$T = F = \set{H_1 = (a_1, a_2), H_2 = (a)}$ with $m(a_1)\neq m(a_2)\neq m(a)$, 
+	$a$ pareto-dominates $a_1$ given history $()$ and $a_2$ given $(a_1)$.
+	Utilities are set such that $u(H\circ b) - u(H) = 0.8$, $\forall H$ and $b \in \{a_1,a _2\}$; $u(H\circ a) - u(H) = 1$, $\forall H$.
+	$H_1 \succ H_2$,
 	pollution and raw costs of all acts are equal.
 
-	We want to select $B_1$.
-	Need to put a strictly higher tax on $a$ otherwise by $f$ being weakly pareto, $a$ will be taken.
+	We want to select $H_1$.
+	Need to put a strictly higher tax on $a$ otherwise by $f$ being weakly pareto, $a$ is taken.
 	Thus there is no weakly Pareto $(τ, f)$.
 \end{example}
-Defining $g(u(a), c(a)) \in \set{0, 1}$ as a function of $u$ and $c$ (not of $τ$), note that in this example, there is also no $g$ that selects the right bundle, so it’s not “the tax’ fault”.
+Defining $g(u(H \circ a) - u(H), c(a)) \in \set{0, 1}$ as a function of $u$ and $c$ (not of $τ$), note that in this example, there is also no $g$ that selects the right history, so it’s not “the tax’ fault”.
 A more meaningful question would ensure that $u$ and $g$ appropriately maximise $\succeq$.
 $g$ is weakly Pareto iff it does not decrease on its first argument and does not increase on its second argument.
 
-We thus wonder in which conditions $\forall {\succeq}, T, M, H \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: $\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+We thus wonder in which conditions $\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible histories of $T$ with $g$ WP: (P1). %$\exists τ, M', f$ such that $τ, f$ are WP and the sequence of granted acts constitute a history that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
 This is not guaranteed.
+
 \begin{example}
-	$T = \set{B_1 = {a_1, a_2}, B_2 = {a}}$, 
-	$u(a_1) = u(a_2) = 1, u(a) = 0.5$;
-	all acts contain only one action;
-	$p(a_1) = p(a_2) = 2T$; $p(a) = 3T$; $H = 3T$; and raw costs of all acts are equal, as a result $F = \{B_2\}$.
-	$B_1 \succ B_2$.
-	Any $g$ WP will pick $B_1$.
-	We want to select $B_2$ (as $B_1$ is not CO²-feasible).
-	This requires a higher tax on $a_i$ than on $a$, which violates WP.
+	$T = F = \set{H_1 = (a_1, a_2), H_2 = (a)}$ with $m(a_1)\neq m(a_2)\neq m(a)$, 
+	$a$ pareto-dominates $a_1$ given history $()$ and $a_2$ given $(a_1)$.
+	Utilities are set such that $u(H\circ b) - u(H) = 1$, $\forall H$ and $b \in \{a_1,a _2\}$; $u(H\circ a) - u(H) = 0.5$, $\forall H$.
+	$p(a_1) = p(a_2) = 2T$; $p(a) = 3T$; $C = 3T$; and raw costs of all acts are equal, as a result $F = \{H_2\}$.
+	$H_1 \succ H_2$.
+	Any $g$ WP will pick $H_1$.
+	We want to select $H_2$ (as $H_1$ is not CO²-feasible).
+	This requires a higher tax on $a_1$ given $()$ and $a_2$ given $(a_1)$ than on $a$ given $()$, which violates WP.
 \end{example}
 
-Now assume that $T$ is \emph{downwards-closed}, meaning that $B \in T ⇒ \forall b \in B: B \setminus \set{b} \in T$.
+Now assume that $T$ is \emph{sub-sequence-closed}, meaning that $H \in T ⇒ \forall h \in H: H - \{h\} \in T$.
 
-Does it hold that $\forall {\succeq}, T \text{ downwards-closed}, M, H \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: $\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+\
+
+Does it hold that $\forall {\succeq}, T \text{sub-sequence-closed}, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: (P1). %$\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
 I think that this holds. To be checked.
 
