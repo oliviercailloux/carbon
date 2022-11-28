@@ -4,6 +4,11 @@
 \input{preamble/redac}
 \input{preamble/math_basics}
 \input{preamble/math_mine}
+
+
+
+\newtheorem{property}{Property}
+%\newtheorem{caorrolary}{Corrolary}
 %\input{preamble/draw}
 %\input{preamble/jdoc}
 
@@ -160,6 +165,41 @@ Now assume that $T$ is \emph{sub-sequence-closed}, meaning that $H \in T ⇒ \fo
 Does it hold that $\forall {\succeq}, T \text{sub-sequence-closed}, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: (P1). %$\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
 I think that this holds. To be checked.
+
+\subsection{A simpler view on the problem}
+Let us investigate a problem where we have a set $O$ of $m$ objects $o_1, \ldots, o_m$, where each object $o_i$ is associated to a triple $(u_i, c_i, p_i)$ where $u_i$ is the utility value of the item, $c_i$ is the monetary cost of the item, and $p_i$ is the pollution cost of the item. 
+We make the assumption that all items are different, i.e, they correspond to different triples. 
+More precisely, we investigate a $2$-dimensional knapsack instance $\mathcal{K}$ with budgets $C$ and $P$. 
+Stated differently, we solve the following problem.
+\begin{align}
+\max_{S\subseteq O} \sum_{o_i \in S} u_i&\\
+s.t.  \sum_{o_i \in S} c_i &\le C\\
+ \sum_{o_i \in S} p_i &\le P\\
+\end{align}
+
+We say that $S\subset O$ satisfies Pareto-dominance if when $o_i \in S$ and $o_j \in O$ Pareto dominates $o_i$ then $o_j \in S$.
+We show the following property: 
+\begin{property}
+$S\subset O$ satisfies Pareto-dominance iff there exists a non-decreasing function $\theta$ such that $o_i\in S$ iff $u_i \ge \theta(c_i,p_i)$.
+\end{property}
+\begin{proof}
+$\Leftarrow$ Trivial.\\
+$\Rightarrow$ We define $\theta(c,p) = \min_{u} (u,c',p')\in S$ s.t. $c'\ge c$ and $p'\ge p$. if such a couple exists and $\infty$ otherwise. The monotonicity is trivial and the fact that $o_i\in S$ iff $u_i \ge \theta(c_i,p_i)$ is due to the fact that $S$ satisfies Pareto dominance and the unicity of triples. Note that the $\theta$ function that we have defined here is the maximal possible one. A lower bound on the values of $theta$ is given by $\max_u (u,c',p')\in O\setminus S$ such that $c'\le c$ and $p'\le p$ if any exists and $0$ otherwise.  
+\end{proof}
+
+\begin{corollary}
+There exists an optimal solution $S^*$ to $\mathcal{K}$ and a non-decreasing function $\theta$ such that $o_i\in S^*$ iff $u_i \ge \theta(c_i,p_i)$.
+\end{corollary}
+
+We now investigate the following problem. Given a set $S$ which satisfies Pareto dominance can we project the pollution cost on the monetary cost (with a monotone taxe) to preserve the Pareto-dominance relation. 
+
+This condition can be checked by linear programming. 
+\begin{align}
+c+\tau_p \le c' + \tau_{p'} &\forall (u,c,p), (u',c',p') \in S^*\times(O\setminus S^*) ,\text{ s.t. } u \le u' \in \\
+\tau_p \le \tau_p' & \forall (\_,\_,p), (\_,\_,p') \in O^2 ,\text{ s.t. }  p \le p'
+\end{align} 
+
+I will try finding a counter example.
 
 \subsection{Draft}
 Here are some examples which might contribute answering some questions.
