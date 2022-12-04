@@ -115,7 +115,6 @@ A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} [(c_a) 
 \subsection{Utility per act}
 We suppose that the lab associates a utility $u(H)$ to every history 
 \HG{is $u$, linear, submodular, should we consider the utility of the sequence or the increment in utility.} 
-\OC{I’d rather consider the utility of the last act (given the history) as primitive. I mean, what is currently the increment.}
 such that $u(()) = 0$. 
 The lab decides to grant the act $a$ given history $H$ according to some function $f(u(H \circ a) - u(H), c(a) + τ(H\circ a)) \in \set{0, 1}$. An act $a$ is granted given history $H$ iff $f(u(H \circ a) - u(H), c(a) + τ( H \circ a)) = 1$. A history $H$ is granted if $H_i$ is granted given $H_{[i-1]}$ for all $i$ in $[|H|]$.
 
