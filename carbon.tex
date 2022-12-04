@@ -80,12 +80,13 @@ A tax may fail to use Reductionism, by design or unwantedly. This happens iff ac
 Taxes may spread efforts in a more or less egalitarian manner.
 
 \subsection{Welfare}
-Given an integer $i \in \mathbb{N}$, we use $[n]$ to denote the set $\{1,\ldots, n\}$. 
+Given an integer $i \in \mathbb{N}$, we use $[n]$ to denote the set $\{1,\ldots, n\}$ (thus $[0] = \emptyset$). 
 
 We denote by $\allacts = \allOperations \times \allMembers$ the set of \emph{acts}, where an act $a$ is a tuple $a = (o,m)$, where $o$  is the operation performed, and $m$ is the lab member performing it; $\allOperations$ denotes the set of all possible operations and $\allMembers$ denotes the set of all lab members. By abuse of notation, we denote by $o(a)$ and $m(a)$ the first and second components of act $a$. \HG{Probablement, quand les fonctions dépendent du membre (coût, taxe) elles ne devraient dépendre que du rang de la personne.}
 
 We call \emph{history} a finite sequence of non-repeated acts, denoted generically as $H$. 
 The set of all histories $\allHistories$ is the set of finite sequences of acts (including the empty sequence $()$). 
+Let $G \in \allHistories$ denote a history of a single member (thus $\forall a, a' \in G: m(a) = m(a')$) and $\allMH$ the set of such single-member-histories.
 
 We define some notations on histories. 
 Given a history $H = (a_1,\ldots,a_n)$ and an act $a\not\in H$, we use $H\circ a$ to  denote the history $(a_1,\ldots, a_n, a)$. 
@@ -94,7 +95,8 @@ Given a history $H$ and a lab member $m$, we denote by $H^{m}$, the sub-sequence
 Given histories $H$ and $H'$, we write $H'\subseteq H$ iff $H'$ is a subsequence of $H$.
 Given $U \subseteq \allacts$,  we use $H - U$ to denote the sequence that is constructed by removing the elements in $U$ from history $H$ without changing the order of the remaining elements.
 
-The lab would like to choose the best history of acts to realize among a set $T \subseteq \allHistories$ which denote the set of possible histories for the current year; her preferences is described by a \emph{welfare ordering} $\succeq$ (a linear order) over $\allHistories$.
+The lab would like to choose the best history of acts to realize among a set $T \subseteq \allHistories$ which denote the set of possible histories for the current year. 
+The preference of the lab is described by a \emph{welfare ordering} $\succeq$ (a linear order) over $\allHistories$.
 However, recall that each act $a$ has a bare cost $c(a)$ (in €) and its action $o(a)$ has a pollution level $p(o(a)) = p(a)$ (in CO²eq). 
 The choices of the lab are restricted by a budget $M$ in € and a carbon budget $C$ in CO²eq.
 
@@ -102,16 +104,22 @@ A history $H$ is \emph{raw-cost-feasible} iff $\sum_{a\in H} c(a) ≤ M$; it is 
 Let $F \subseteq T$ denote the \emph{a priori feasible} histories, meaning, the ones of $T$ which are raw-cost-feasible and CO²-feasible.
 
 The lab would like to design a tax function to maximize welfare under the budget constraints. 
-Let $τ: \allHistories → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)  
-Given a history $H$, the taxe function only depends only on the subsequence $H^{m}$ where $m = m(H_{|H|})$ is the lab member making the last operation in the history, $\tau(H) = \tau(H^{m})$. 
+Let $τ: \allMH → \R^+$ denote the tax function. (The set $\R^+$ includes zero.)  
+%Given a history $H$, the tax function only depends only on the subsequence $H^{m}$ where $m = m(H_{|H|})$ is the lab member making the last operation in the history, $\tau(H) = \tau(H^{m})$. 
+Abusing notation, given $H \in \allHistories$, we also write $τ(H)$ to mean $\tau(H^{m})$ where $m = m(H_{|H|})$ is the lab member making the last operation in the history. 
 A cap is a value $M' ≥ M$.
-A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} (c_a) + τ(H) ≤ M'$.
+%A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} (c_a) + τ(H) ≤ M'$.
+A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} [(c_a) + τ(H_\text{from start to $a$})] ≤ M'$.
+\OCf{On taxe tous les voyages, pas seulement le dernier, non ?}
 
 \subsection{Utility per act}
-We suppose that the lab associates a utility $u(H)$ to every history (\HG{is $u$, linear, submodular, should we consider the utility of the sequence or the increment in utility.}) such that $u(()) = 0$. 
+We suppose that the lab associates a utility $u(H)$ to every history 
+\HG{is $u$, linear, submodular, should we consider the utility of the sequence or the increment in utility.} 
+\OC{I’d rather consider the utility of the last act (given the history) as primitive. I mean, what is currently the increment.}
+such that $u(()) = 0$. 
 The lab decides to grant the act $a$ given history $H$ according to some function $f(u(H \circ a) - u(H), c(a) + τ(H\circ a)) \in \set{0, 1}$. An act $a$ is granted given history $H$ iff $f(u(H \circ a) - u(H), c(a) + τ( H \circ a)) = 1$. A history $H$ is granted if $H_i$ is granted given $H_{[i-1]}$ for all $i$ in $[|H|]$.
 
-We wonder in which conditions we obtain the following property: 
+We wonder in which conditions we obtain the following property.
 
 $\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset: (P1)  \exists τ, M', f$ such that the maximal sequences of granted acts constitute sequences that constitute a non-empty prefix of $\succeq_{[F]}$ and are tax-feasible. 
 We may also require that there is only one maximal sequences of granted acts.
@@ -247,8 +255,6 @@ Some acts may be considered out of scope (e.g., impossible to tax in practice be
 An act that is not out of scope is said to be within the scope. Note that an act may be within the scope but not be taxed.
 
 \section{LAMSADE}
-\commentOCf{Hugo, je propose d’utiliser cette section comme brouillon pour nos propositions à venir. On pourra éventuellement l’intégrer à l’article à terme en la re-modelant, comme un exemple d’application, mais c’est à voir ultérieurement.}
-
 The tax should use Reductionism.
 
 The scope should include every act which the Dauphine accounting services see (to be defined more precisely?).
