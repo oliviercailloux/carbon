@@ -119,39 +119,18 @@ We suppose that the lab associates a utility $u(H)$ to every history
 such that $u(()) = 0$. 
 The lab decides to grant the act $a$ given history $H$ according to some function $f(u(H \circ a) - u(H), c(a) + τ(H\circ a)) \in \set{0, 1}$. An act $a$ is granted given history $H$ iff $f(u(H \circ a) - u(H), c(a) + τ( H \circ a)) = 1$. A history $H$ is granted if $H_i$ is granted given $H_{[i-1]}$ for all $i$ in $[|H|]$.
 
-We wonder in which conditions we obtain the following property.
-
-$\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset: (P1)  \exists τ, M', f$ such that the maximal sequences of granted acts constitute sequences that constitute a non-empty prefix of $\succeq_{[F]}$ and are tax-feasible. 
-We may also require that there is only one maximal sequences of granted acts.
-
-I believe that with no constraint on $τ$ or $f$, the answer is: always.
-Consider $B \in \max_F {\succeq}$.
-Define $M' = M$ and $\tau(H) = 0$ if $H\subseteq B$ and $\infty$ otherwise. 
-
 An act $a$ given $H$ \emph{weakly Pareto-dominates} another act $a'$ given $H'$ iff $|H^{m(a)}| = |{H'}^{m(a')}|$ 
 and $\forall i: p(H^{m(a)}_i) ≤ p({H'}^{m(a')}_i) \land u(H \circ a) - u(H) ≥ u(H'\circ a') - u(H') \land p(a) ≤ p(a') \land c(a) ≤ c(a')$.
 
 $τ$ is weakly Pareto iff $\tau(H \circ a) \le \tau(H' \circ a')$ when $a$ given $H$ weakly pareto-dominates $a'$ given $H'$.
 $f$ is weakly Pareto iff it does not decrease on its first argument and does not increase on its second argument.
 
-In which conditions are $τ$ and $f$ weakly Pareto (WP)?
-
-\begin{example}
-	$T = F = \set{H_1 = (a_1, a_2), H_2 = (a)}$ with $m(a_1)\neq m(a_2)\neq m(a)$, 
-	$a$ pareto-dominates $a_1$ given history $()$ and $a_2$ given $(a_1)$.
-	Utilities are set such that $u(H\circ b) - u(H) = 0.8$, $\forall H$ and $b \in \{a_1,a _2\}$; $u(H\circ a) - u(H) = 1$, $\forall H$.
-	$H_1 \succ H_2$,
-	pollution and raw costs of all acts are equal.
-
-	We want to select $H_1$.
-	Need to put a strictly higher tax on $a$ otherwise by $f$ being weakly pareto, $a$ is taken.
-	Thus there is no weakly Pareto $(τ, f)$.
-\end{example}
-Defining $g(u(H \circ a) - u(H), c(a)) \in \set{0, 1}$ as a function of $u$ and $c$ (not of $τ$), note that in this example, there is also no $g$ that selects the right history, so it’s not “the tax’ fault”.
-A more meaningful question would ensure that $u$ and $g$ appropriately maximise $\succeq$.
+Define $g(u(H \circ a) - u(H), c(a)) \in \set{0, 1}$ as a function of $u$ and $c$ (not of $τ$). 
 $g$ is weakly Pareto iff it does not decrease on its first argument and does not increase on its second argument.
 
-We thus wonder in which conditions $\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible histories of $T$ with $g$ WP: (P1). %$\exists τ, M', f$ such that $τ, f$ are WP and the sequence of granted acts constitute a history that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
+We wonder in which conditions we obtain the following property. 
+$\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible histories of $T$ with $g$ WP: (P1), that is, $\exists τ, M', f$ such that the maximal sequences of granted acts constitute sequences that constitute a non-empty prefix of $\succeq_{[F]}$ and are tax-feasible. 
+We may also require that there is only one maximal sequences of granted acts.
 
 This is not guaranteed.
 
@@ -166,9 +145,33 @@ This is not guaranteed.
 	This requires a higher tax on $a_1$ given $()$ and $a_2$ given $(a_1)$ than on $a$ given $()$, which violates WP.
 \end{example}
 
-Now assume that $T$ is \emph{sub-sequence-closed}, meaning that $H \in T ⇒ \forall h \in H: H - \{h\} \in T$.
+\subsubsection{Condition}
+We wonder in which conditions we obtain the following property.
 
-\
+$\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset: (P1)$
+
+I believe that with no constraint on $τ$ or $f$, the answer is: always.
+Consider $B \in \max_F {\succeq}$.
+Define $M' = M$ and $\tau(H) = 0$ if $H\subseteq B$ and $\infty$ otherwise. 
+
+In which conditions are $τ$ and $f$ weakly Pareto (WP)?
+
+\begin{example}
+	$T = F = \set{H_1 = (a_1, a_2), H_2 = (a)}$ with $m(a_1)\neq m(a_2)\neq m(a)$, 
+	$a$ pareto-dominates $a_1$ given history $()$ and $a_2$ given $(a_1)$.
+	Utilities are set such that $u(H\circ b) - u(H) = 0.8$, $\forall H$ and $b \in \{a_1,a _2\}$; $u(H\circ a) - u(H) = 1$, $\forall H$.
+	$H_1 \succ H_2$,
+	pollution and raw costs of all acts are equal.
+
+	We want to select $H_1$.
+	Need to put a strictly higher tax on $a$ otherwise by $f$ being weakly pareto, $a$ is taken.
+	Thus there is no weakly Pareto $(τ, f)$.
+\end{example}
+Note that in this example, there is also no $g$ that selects the right history, so it’s not “the tax’ fault”.
+A more meaningful question would ensure that $u$ and $g$ appropriately maximise $\succeq$.
+
+\subsubsection{Open question}
+Assume that $T$ is \emph{sub-sequence-closed}, meaning that $H \in T ⇒ \forall h \in H: H - \{h\} \in T$.
 
 Does it hold that $\forall {\succeq}, T \text{sub-sequence-closed}, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: (P1). %$\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
