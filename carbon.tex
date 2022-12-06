@@ -144,9 +144,9 @@ This is not guaranteed.
 	This requires a higher tax on $a_1$ given $()$ and $a_2$ given $(a_1)$ than on $a$ given $()$, which violates WP.
 \end{example}
 
-\subsubsection{Condition}
+\subsubsection{Without the condition on g}
+Here we see that the condition on $g$ is not vacuous.
 We wonder in which conditions we obtain the following property.
-
 $\forall {\succeq}, T, M, C \suchthat F ≠ \emptyset: (P1)$
 
 I believe that with no constraint on $τ$ or $f$, the answer is: always.
@@ -169,12 +169,32 @@ In which conditions are $τ$ and $f$ weakly Pareto (WP)?
 Note that in this example, there is also no $g$ that selects the right history, so it’s not “the tax’ fault”.
 A more meaningful question would ensure that $u$ and $g$ appropriately maximise $\succeq$.
 
-\subsubsection{Open question}
+\subsubsection{Sub-sequence closed}
 Assume that $T$ is \emph{sub-sequence-closed}, meaning that $H \in T ⇒ \forall h \in H: H - \{h\} \in T$.
 
 Does it hold that $\forall {\succeq}, T \text{sub-sequence-closed}, M, C \suchthat F ≠ \emptyset \land \exists g$ that selects a $\succeq$-maximal element of the raw-cost-feasible bundles of $T$ with $g$ WP: (P1). %$\exists τ, M', f$ such that $τ, f$ are WP and the set of granted acts constitute a bundle that is a $\succeq$-maximal element of $F$ and is tax-feasible. 
 
 I think that this holds. To be checked.
+
+\subsubsection{Without f and g}
+I now believe that the selection functions are not useful.
+
+We assume that the lab is able to select a bundle that matches the budget and optimizes its preference. The way it proceeds may be left implicit. We want to design a tax so that the lab can pursue its normal procedure just by considering the new (taxed) costs and the new budget instead of the raw costs with the original budget.
+
+Consider any $T, M, C$. We wonder whether
+$\exists τ, M' \suchthat \forall H \in T, \sum_{a \in H} c(a) + τ(H_a) ≤ M' ⇔ H \in F$.
+
+Assume that all acts are raw-cost-f.
+Then just set $τ(H_a) = p(a) - c(a)$ and $M' = C$.
+Indeed, $H \in F ⇔ \sum_{a \in H} p(a) ≤ C ⇔ \sum c(a) + τ(H_a) ≤ C = M'$.
+
+Trying to make $τ$ depend on the pollution only, let’s try to set $τ(H_a) = p(a)$.
+We have that $H \in F ⇔ \sum_{a \in H} p(a) ≤ C$. 
+We want: $\sum_{a \in H} p(a) ≤ C ⇔ \sum c(a) + \sum p(a) ≤ M'$.
+Now assume that for $H1 \in F$, $\sum c(a) = 10$ while $\sum p(a) = C$.
+This requires that $10 + C ≤ M'$.
+Also assume that for $H2 \notin F$, $\sum c(a) = 5$ while $\sum p(a) = C + 1$.
+This requires that $M' < 5 + C + 1$.
 
 \subsection{A simpler view on the problem}
 Let us investigate a problem where we have a set $O$ of $m$ objects $o_1, \ldots, o_m$, where each object $o_i$ is associated to a triple $(u_i, c_i, p_i)$ where $u_i$ is the utility value of the item, $c_i$ is the monetary cost of the item, and $p_i$ is the pollution cost of the item. 
