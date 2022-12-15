@@ -109,7 +109,7 @@ Let $τ: \allMH → \R^+$ denote the tax function. (The set $\R^+$ includes zero
 Abusing notation, given $H \in \allHistories$, we also write $τ(H)$ to mean $\tau(H^{m})$ where $m = m(H_{|H|})$ is the lab member making the last operation in the history. 
 A cap is a value $M' ≥ M$.
 %A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} (c_a) + τ(H) ≤ M'$.
-A history $H$ is tax-feasible (for a given cap $M'$) iff $\sum_{a \in H} [(c_a) + τ(H_\text{from start to $a$})] ≤ M'$.
+A history $H$ is tax-feasible (for a given cap $M'$) iff given $H = \set{a_1, …, a_k}$, $\sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M'$.
 \OCf{On taxe tous les voyages, pas seulement le dernier, non ?}
 
 \subsection{Utility per act}
@@ -179,10 +179,50 @@ I think that this holds. To be checked.
 \subsubsection{Without f and g}
 I now believe that the selection functions are not useful.
 
-We assume that the lab is able to select a bundle that matches the budget and optimizes its preference. The way it proceeds may be left implicit. We want to design a tax so that the lab can pursue its normal procedure just by considering the new (taxed) costs and the new budget instead of the raw costs with the original budget.
+We assume that the lab is able to select a bundle that matches the budget and optimizes its preference. The way it proceeds may be left implicit. We want to design a tax so that the lab can pursue its normal procedure just by considering the new (taxed) costs instead of the raw costs.
 
-Consider any $T, M, C$. We wonder whether
-$\exists τ, M' \suchthat \forall H \in T, \sum_{a \in H} c(a) + τ(H_a) ≤ M' ⇔ H \in F$.
+\begin{theorem}
+	$\forall T, M, C$,
+	\begin{equation}
+		\exists τ \suchthat \forall H \in T, \left[\sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M ⇔ H \in F\right].
+	\end{equation}
+\end{theorem}
+\begin{proof}
+Define $τ(H_{\intvl{1, i}}) = M + 1 ⇔ \sum_{a \in H_{\intvl{1, i}}} p(a) > C$ and $τ(H_{\intvl{1, i}}) = 0$ otherwise.
+
+We have that $H \in F ⇔ [\forall i \in \intvl{1, \card{H}}: τ(H_{\intvl{1, i}}) = 0] \land [\sum_{a \in H} c(a) ≤ M]$. 
+Indeed, if $H \in F$, then $\forall i \in \intvl{1, \card{H}}: \sum_{a \in H_{\intvl{1, i}}} p(a) ≤ C$, whence the consequent; 
+and if $H \notin F \land [\sum_{a \in H} c(a) ≤ M]$, then $\exists i \in \intvl{1, \card{H}} \suchthat \sum_{a \in H_{\intvl{1, i}}} p(a) > C$, whence, for such an $i$, $τ(H_{\intvl{1, i}}) = M + 1$.
+
+To conclude, observe that $\left[[\forall i \in \intvl{1, \card{H}}: τ(H_{\intvl{1, i}}) = 0] \land [\sum_{a \in H} c(a) ≤ M]\right] ⇔ \sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M$.
+\end{proof}
+
+But, that’s not the kind of tax that we want. Why? To be continued…
+
+Consider an act that is raw-cost-f, thus $\sum_{a \in H} c(a) ≤ M$.
+Then $H \in F ⇔ \sum_{a \in H} p(a) ≤ C$.
+
+Thus $\sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] = \sum_{i \in \intvl{1, k}} (c_{a_i}) ≤ M$.
+
+Assume that all acts are raw-cost-f, thus $\forall H \in T: \sum_{a \in H} c(a) ≤ M$. And all by the same member.
+Then just set $τ(H_a) = (p(a) - \frac{C}{\card{H_a}}) + (\frac{M}{\card{H_a}} - c(a))$ (equivalently, $p(a) = c(a) + τ(H_a) + \frac{C - M}{\card{H_a}}$).
+Indeed, $H \in F ⇔ \sum_{a \in H} p(a) ≤ C ⇔ \sum c(a) + τ(H_a) ≤ M$.
+
+\begin{example}
+	Consider:
+	\begin{itemize}
+		\item $M = 20$, $C = 2$, 
+		\item $T = \set{H, H'}$, 
+		\item $H = \set{a_1, a_2}$, $c(a_1) = 10$, $c(a_2) = 5$, $p(a_1) = 1$, $p(a_2) = 2$, 
+		\item $H' = \set{a_1, a_3, a_4}$, $c(a_3) = 3$, $c(a_4) = 4$, $p(a_3) = 1$, $p(a_4) = 1$. 
+	\end{itemize}
+	All acts are raw-cost-f. Only $H$ is CO²-feasible.
+	Set $τ(H_{a_1}) = 1 - 2/2 + 20/2 - 10 = 0$, $τ(H_{a_2}) = 2 - 2/2 + 20/2 - 5 = 5$, $τ(H'_{a_1}) = ?$.
+%	Imagine $\set{a_1, a_3}$ is just feasible and $\set{a_2, a_3}$ as well. Then need to put a tax on one of $a_1$ and $a_2$ (at least) but can’t!
+\end{example}
+
+Below, we wonder whether
+$\forall T, M, C, \exists τ, M' \suchthat \forall H \in T, \sum_{a \in H} c(a) + τ(H_a) ≤ M' ⇔ H \in F$.
 
 Assume that all acts are raw-cost-f.
 Then just set $τ(H_a) = p(a) - c(a)$ and $M' = C$.
@@ -195,6 +235,27 @@ Now assume that for $H1 \in F$, $\sum c(a) = 10$ while $\sum p(a) = C$.
 This requires that $10 + C ≤ M'$.
 Also assume that for $H2 \notin F$, $\sum c(a) = 5$ while $\sum p(a) = C + 1$.
 This requires that $M' < 5 + C + 1$.
+
+Trying to make $τ$ depend on the pollution only, let’s try to set $τ(H_a) = f(p(a))$.
+We have that $H \in F ⇔ \sum_{a \in H} p(a) ≤ C$. 
+We want: $\sum_{a \in H} p(a) ≤ C ⇔ \sum c(a) + \sum f(p(a)) ≤ M'$.
+Now assume that for $H1 \in F$, $\sum c(a) = 10$ while $\sum p(a) = C$.
+This requires that $10 + f(C) ≤ M'$.
+Also assume that for $H2 \notin F$, $\sum c(a) = 5$ while $\sum p(a) = C + 1$.
+This requires that $M' < 5 + f(C + 1)$.
+We obtain $10 + f(C) ≤ M' < 5 + f(C + 1)$ or $5 + f(C) ≤ M' < f(C + 1)$.
+
+Adding now some $H$ that are not raw-cost-f.
+Thus $H \notin F$ and $\sum_{a \in H} c(a) > M$.
+Say $\sum c(a) = M + 1$.
+We want: $\sum c(a) + \sum f(p(a)) > M'$. 
+Thus: $\sum f(p(a)) > M' - M - 1$.
+Now assume $p(a) = C$. We get: $\sum f(C) > M' - M - 1$.
+Joining, we get $M' - M - 1 < f(C) ≤ M' - 5$ thus $- M - 1 < 5$.
+Now assume $p(a) = C + 1$. We get: $\sum f(C + 1) > M' - M - 1$.
+Joining, we get $M' - M - 1 < f(C) ≤ M' - 5$ thus $- M - 1 < 5$.
+
+As a result, my personal uncertain guess is in favor of existence.
 
 \subsection{A simpler view on the problem}
 Let us investigate a problem where we have a set $O$ of $m$ objects $o_1, \ldots, o_m$, where each object $o_i$ is associated to a triple $(u_i, c_i, p_i)$ where $u_i$ is the utility value of the item, $c_i$ is the monetary cost of the item, and $p_i$ is the pollution cost of the item. 
