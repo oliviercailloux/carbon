@@ -182,12 +182,12 @@ I now believe that the selection functions are not useful.
 We assume that the lab is able to select a bundle that matches the budget and optimizes its preference. The way it proceeds may be left implicit. We want to design a tax so that the lab can pursue its normal procedure just by considering the new (taxed) costs instead of the raw costs.
 
 \begin{theorem}
-	$\forall T, M, C$,
+	Given a lab with a single member, $\forall T, M, C$,
 	\begin{equation}
 		\exists τ \suchthat \forall H \in T, \left[\sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M ⇔ H \in F\right].
 	\end{equation}
 \end{theorem}
-\begin{proof}[wrong]
+\begin{proof}
 Define $τ(H_{\intvl{1, i}}) = M + 1 ⇔ \sum_{a \in H_{\intvl{1, i}}} p(a) > C$ and $τ(H_{\intvl{1, i}}) = 0$ otherwise.
 
 We have that $H \in F ⇔ [\forall i \in \intvl{1, \card{H}}: τ(H_{\intvl{1, i}}) = 0] \land [\sum_{a \in H} c(a) ≤ M]$. 
@@ -197,25 +197,27 @@ and if $H \notin F \land [\sum_{a \in H} c(a) ≤ M]$, then $\exists i \in \intv
 To conclude, observe that $\left[[\forall i \in \intvl{1, \card{H}}: τ(H_{\intvl{1, i}}) = 0] \land [\sum_{a \in H} c(a) ≤ M]\right] ⇔ \sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M$.
 \end{proof}
 
-That seems wrong. We could have $H \notin F \land [\sum_{a \in H} c(a) ≤ M]$ (hence $\sum_{a \in H} p(a) > C$) though $\forall i \in \intvl{1, \card{H}}: \sum_{a \in H^m_{\intvl{1, i}}} p(a) ≤ C$.
-
-But, that’s not the kind of tax that we want. Why? To be continued…
-
-Consider $a_1$ and $a_2$ from different members, both $p(a) = C$.
-
-\begin{example}
-	Consider:
+\begin{theorem}
+	$\exists T, M, C \suchthat$
+	\begin{equation}
+		\nexists τ \suchthat \forall H \in T, \left[\sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M ⇔ H \in F\right].
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	We write an act as a triple (member, raw cost, pollution).
 	\begin{itemize}
-		\item $M = 20$, $C = 2$, 
-		\item $T = \set{H, H'}$, 
-		\item all acts by the same member,
-		\item $H = \set{a_1, a_2}$, $c(a_1) = 10$, $c(a_2) = 5$, $p(a_1) = 1$, $p(a_2) = 2$, 
-		\item $H' = \set{a_1, a_3, a_4}$, $c(a_3) = 3$, $c(a_4) = 4$, $p(a_3) = 1$, $p(a_4) = 1$. 
+		\item $H_\text{out} = (a_1 = (m_1, M/2, C), a_2 = (m_2, M/2, C))$,
+		\item $H_\text{just 1} = (a_1 = (m_1, M/2, C), a' = (m', M/2, 0))$,
+		\item $H_\text{just 2} = (a_2 = (m_2, M/2, C), a' = (m', M/2, 0))$. 
 	\end{itemize}
-	All acts are raw-cost-f. Only $H$ is CO²-feasible.
-	To be continued…
-%	Imagine $\set{a_1, a_3}$ is just feasible and $\set{a_2, a_3}$ as well. Then need to put a tax on one of $a_1$ and $a_2$ (at least) but can’t!
-\end{example}
+	Note that $F = \set{H_\text{just 1}, H_\text{just 2}}$.
+	As $H_\text{out} \notin F$, $τ$ should satisfy $c(a_1) + τ(a_1) + c(a_2) + τ(a_2) > M$ thus $τ(a_1) + τ(a_2) > 0$.
+	As $H_\text{just 1} \in F$, $τ$ should satisfy $c(a_1) + τ(a_1) + c(a') + τ(a') ≤ M$ thus $τ(a_1) + τ(a') ≤ 0$.
+	Similarly, $τ$ should satisfy $τ(a_2) + τ(a') ≤ 0$.
+	We obtain $τ(a_1) = τ(a_2) = 0$ which contradicts $τ(a_1) + τ(a_2) > 0$.
+\end{proof}
+
+This negative result reverts if $τ$ is allowed to be negative. But I am afraid that this will not suffice to solve the problem…
 
 \subsection{A simpler view on the problem}
 Let us investigate a problem where we have a set $O$ of $m$ objects $o_1, \ldots, o_m$, where each object $o_i$ is associated to a triple $(u_i, c_i, p_i)$ where $u_i$ is the utility value of the item, $c_i$ is the monetary cost of the item, and $p_i$ is the pollution cost of the item. 
