@@ -187,7 +187,7 @@ We assume that the lab is able to select a bundle that matches the budget and op
 		\exists τ \suchthat \forall H \in T, \left[\sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M ⇔ H \in F\right].
 	\end{equation}
 \end{theorem}
-\begin{proof}
+\begin{proof}[wrong]
 Define $τ(H_{\intvl{1, i}}) = M + 1 ⇔ \sum_{a \in H_{\intvl{1, i}}} p(a) > C$ and $τ(H_{\intvl{1, i}}) = 0$ otherwise.
 
 We have that $H \in F ⇔ [\forall i \in \intvl{1, \card{H}}: τ(H_{\intvl{1, i}}) = 0] \land [\sum_{a \in H} c(a) ≤ M]$. 
@@ -197,7 +197,11 @@ and if $H \notin F \land [\sum_{a \in H} c(a) ≤ M]$, then $\exists i \in \intv
 To conclude, observe that $\left[[\forall i \in \intvl{1, \card{H}}: τ(H_{\intvl{1, i}}) = 0] \land [\sum_{a \in H} c(a) ≤ M]\right] ⇔ \sum_{i \in \intvl{1, k}} [(c_{a_i}) + τ(H_{\intvl{1, i}})] ≤ M$.
 \end{proof}
 
+That seems wrong. We could have $H \notin F \land [\sum_{a \in H} c(a) ≤ M]$ (hence $\sum_{a \in H} p(a) > C$) though $\forall i \in \intvl{1, \card{H}}: \sum_{a \in H^m_{\intvl{1, i}}} p(a) ≤ C$.
+
 But, that’s not the kind of tax that we want. Why? To be continued…
+
+Consider $a_1$ and $a_2$ from different members, both $p(a) = C$.
 
 \begin{example}
 	Consider:
